@@ -1,0 +1,25 @@
+<mat-nav-list>
+  <a mat-list-item
+     class="map-commission-list-item"
+     *ngFor="let commission of selectedCommissions; let i = index"
+     (click)="openLink($event)"
+     [routerLink]="['/elections/commission/' + commission.id]">
+    <div class="col-md-12">
+      <div class="row py-3">
+        <div class="col-8 col-md-10">
+          <b>{{commission.code}} | {{commission.description}}</b>: <span class="text-color-gray">{{commission.location}}</span>
+        </div>
+        <div class="col-4 col-md-2">
+          <zubr-client-button
+            class="float-md-right"
+            [options]="{
+          label: 'view',
+          routerLink: '/commission/' + commission.id
+        }">
+          </zubr-client-button>
+        </div>
+      </div>
+    </div>
+  </a>
+</mat-nav-list>
+

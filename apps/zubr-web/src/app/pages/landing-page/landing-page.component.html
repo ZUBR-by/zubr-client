@@ -1,0 +1,41 @@
+<div class="landing-background">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<div class="landing-container">
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <div class="landing-content">
+      <div class="landing-logo text-center">
+        <img src="./assets/images/logo.svg">
+      </div>
+      <div class="landing-title text-center my-3" translate>project_slogan</div>
+      <div class="landing-description text-center my-5" translate>welcome_to_zubr</div>
+      <div class="landing-button text-center">
+        <button [routerLink]="['/elections']" translate>start</button>
+      </div>
+      <ul class="non-styled-ul sidebar-language-items text-center my-3">
+        <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('ru')" translate>russian</a></li>
+        <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('be')" translate>belarusian</a></li>
+        <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('en')" translate>english</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

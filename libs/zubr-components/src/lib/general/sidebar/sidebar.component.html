@@ -1,0 +1,216 @@
+<div>
+
+  <a [routerLink]="['/elections']" class="img logo mx-5 mt-3">
+    <img alt="Logo" src="assets/images/logo.svg?v=1">
+  </a>
+
+<!--  <div class="my-3 mx-3 sidebar-account">-->
+<!--    <a [routerLink]="['/register']" translate>login_register</a>-->
+<!--  </div>-->
+
+  <div class="sidebar-separator m-3"></div>
+
+  <ul class="list-unstyled components mb-3">
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/map']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            map
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>map_of_elections</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/messages']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            add_alert
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>incidents</div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/results']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            article
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center">
+              Информация о результатах
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <div class="sidebar-separator m-3"></div>
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/members']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            people
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>station_members</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/commissions']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            account_balance
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>commissions</div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/organizations']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            flag
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>organizations</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+  <div class="sidebar-separator m-3"></div>
+
+  <ul class="list-unstyled components mb-3">
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/about']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            favorite
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>about</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+  <div class="sidebar-separator m-3"></div>
+
+  <div class="sidebar-section-title mx-3 mb-3">
+    <span matBadge="{{ bookmarksCount$ | async }}"
+          matBadgeOverlap="false"
+          [routerLink]="['/elections/bookmarks']"
+          class="cursor-pointer outline-none">
+      {{ 'my_subscriptions' | translate }}&nbsp;</span>
+  </div>
+
+  <div class="sidebar-footer mb-3 mx-3 text-center"
+       *ngIf="(bookmarksCount$ | async) == 0">
+    <zubr-client-button
+      class="sidebar-button-outline"
+      [routerLink]="['/elections/commissions']"
+      [options]="{
+        icon: 'bookmarks',
+        label: 'follow',
+        appearance: 'flat'
+      }">
+    </zubr-client-button>
+  </div>
+
+  <ul class="list-unstyled components mb-3 subscriptions-menu"
+      *ngIf="(bookmarksCount$ | async) > 0">
+
+    <li *ngFor="let bookmark of bookmarks$ | async"
+        class="subscription-menu-item my-1">
+      <a class="align-self-center py-2"
+         [routerLink]="[bookmark.url]">
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>{{bookmark.label}}</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+
+
+  <div class="sidebar-separator m-3"></div>
+
+  <div class="mx-3 mb-3 text-center">
+    <ul class="non-styled-ul sidebar-language-items">
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('ru')" translate>russian</a></li>
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('be')" translate>belarusian</a></li>
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('en')" translate>english</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="sidebar-mobile d-block d-md-none w-100 position-fixed">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-3">
+        <a [routerLink]="['/elections/map']" routerLinkActive="active">
+          <i class="material-icons">
+            favorite
+          </i>
+        </a>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+</div>

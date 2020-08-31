@@ -1,0 +1,4 @@
+/* Makes paginator 'items per page' input element narrower */
+::ng-deep .mat-paginator-page-size-select {
+  width: 40px !important;
+}

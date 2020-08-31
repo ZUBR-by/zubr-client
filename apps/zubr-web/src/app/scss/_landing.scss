@@ -1,0 +1,111 @@
+.landing-body {
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.landing-background {
+  width: 100%;
+  height: 100%;
+  background: darken($zubr-primary-color, 30%);
+  z-index: -1;
+  position: absolute;
+  overflow: hidden;
+}
+
+$particleSize: 20vmin;
+$animationDuration: 6s;
+$amount: 20;
+.landing-background span {
+  z-index: -1;
+  width: $particleSize;
+  height: $particleSize;
+  border-radius: $particleSize;
+  backface-visibility: hidden;
+  position: absolute;
+  animation-name: move;
+  animation-duration: $animationDuration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  $colors: (
+    $zubr-ui-control-color,
+    $zubr-primary-color,
+    darken($zubr-element-white-hover-color, 10%),
+  );
+  @for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+      color: nth($colors, random(length($colors)));
+      top: random(100) * 1%;
+      left: random(100) * 1%;
+      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+      $blurRadius: (random() + 0.5) * $particleSize * 0.5;
+      $x: if(random() > 0.5, -1, 1);
+      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    }
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+.landing-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  .landing-content {
+    z-index: 100;
+    width: 600px;
+    color: #ffffff;
+    .landing-logo {
+      text-align: center;
+      img {
+        width: 300px;
+      }
+    }
+    .landing-title {
+      font-size: 32px;
+      line-height: 32px;
+      font-weight: bold;
+    }
+    .landing-description {
+      color: $zubr-element-white-hover-color;
+    }
+    .landing-button {
+      button {
+        width: 200px;
+        padding: 10px;
+        background-color: $zubr-font-primary-color;
+        color: #ffffff;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+        border: 1px solid $zubr-secondary-color;
+        border-radius: 3px;
+        &:hover {
+          background-color: $zubr-ui-control-color;
+          box-shadow: 0 0 30px rgba(255,255,255, 0.1);
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md)  {
+  .landing-container {
+    .landing-content {
+      width: 300px;
+      .landing-logo {
+        img {
+          width: 100px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+<div class="container">
+  <h5 class="mb-3">
+    {{
+      (data.errors && data.errors.length > 0) || data.message
+        ? ('Error' | translate)
+        : ('Import erfolgreich' | translate)
+    }}
+  </h5>
+  <div class="row my-3">
+    <div class="col-md-12">
+      <span translate>Importierte Stationen wurden dem System hinzugefügt</span>:<br />
+      <b>{{ data.created }}</b>&nbsp;<span translate>neue Pateint-Datensätze wurden erstellt</span>
+      und <b>{{ data.updated }}</b>&nbsp;<span translate>Pateint-Datensätze wurden aktualisiert</span>.
+    </div>
+  </div>
+  <div *ngIf="data.errors && data.errors.length > 0" class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger w-100">
+        <div *ngFor="let error of data.errors" class="w-100">
+          {{ error.message | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!data.errors && data.message" class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger w-100">
+        {{ data.message | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="row mb-1">
+    <div class="col-md-12 justify-content-end">
+      <zubr-client-button
+        class="float-right"
+        [options]="{
+          label: 'OK',
+          appearance: 'stroked'
+        }"
+        mat-dialog-close
+      >
+      </zubr-client-button>
+    </div>
+  </div>
+</div>

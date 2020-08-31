@@ -1,0 +1,82 @@
+<div class="zubr-loading-container"
+     [hidden]="(loading$ | async) === false">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+<form [formGroup]="form" *ngIf="!successMode">
+  <div class="mt-3 my-3">
+    <h3><span translate>your_data</span></h3>
+    <div class="row">
+      <div class="col-md-12">
+        <zubr-client-input
+          [options]="{
+            label: 'observer_identifier',
+            hint: 'observer_id_hint',
+            mask: '0000-0000-0000',
+            required: true,
+            type: 'text',
+            maxLength: 30
+          }"
+          [formControl]="observerId"
+        ></zubr-client-input>
+      </div>
+    </div>
+  </div>
+  <div class="mt-3 my-3">
+    <div class="row">
+      <div class="col-md-12">
+        <zubr-client-input
+          [options]="{
+            label: 'phone_tail',
+            hint: 'phone_tail_hint',
+            required: true,
+            type: 'number',
+            maxLength: 4
+          }"
+          [formControl]="phoneTail"
+        ></zubr-client-input>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-checkbox formControlName="hasSignatures"><span translate>has_signatures</span></mat-checkbox>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-checkbox formControlName="approvedObserver"><span translate>approved_observer</span></mat-checkbox>
+    </div>
+  </div>
+
+  <div class="row mt-3" *ngIf="error">
+    <div class="col-md-12">
+      <div class="alert alert-danger w-100" [innerHTML]="error | translate"></div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <zubr-client-button
+        (click)="approvedObserver.value  ? submit() : false"
+        [options]="{
+          label: 'send',
+          disabled: ! (approvedObserver.value),
+          appearance: 'flat'
+        }"
+      >
+      </zubr-client-button>
+    </div>
+  </div>
+</form>
+<div class="my-5" *ngIf="successMode">
+  <div class="alert alert-success" [innerHTML]="'verification_succeed_message' | translate"></div>
+  <div>
+    <zubr-client-button
+      class="w-100 d-block"
+      (click)="navigateToPlatform()"
+      [options]="{
+                    label: 'move_to_platform',
+                    appearance: 'flat'
+                  }">
+    </zubr-client-button>
+  </div>
+</div>

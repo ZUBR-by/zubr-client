@@ -1,0 +1,374 @@
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        <span translate>registration_of_turnout_early</span>
+      </h3>
+      <p class="my-1 color-secondary dialog-dynamic-title">
+        {{commission?.name}}: {{commission?.description}}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3" [formGroup]="verificationForm">
+    <h4><span translate>observer_verification</span></h4>
+    <div class="row">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'observer_identifier',
+            hint: 'observer_id_hint',
+            mask: '0000-0000-0000',
+            enableAutocomplete: true,
+            required: true,
+            type: 'text',
+            maxLength: 30
+          }"
+          [formControl]="verificationForm.get('uid')"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'phone_tail',
+            hint: 'phone_tail_hint',
+            required: true,
+            enableAutocomplete: true,
+            type: 'number',
+            maxLength: 4
+          }"
+          [formControl]="verificationForm.get('phone')"
+        ></zubr-client-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3" [formGroup]="form">
+    <div class="row">
+      <div class="col-md-12">
+        <span class="font-weight-bold color-ui-control" translate>observer_status</span>:
+        <span class="color-danger" [class.color-success]="isVerified">{{ status | translate }}</span>
+      </div>
+      <div class="col-md-12 mt-3">
+        <div class="alert alert-primary dialog-dynamic-title" translate>we_recommend_you_to_verify</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+
+    <h4><span translate>registration_of_protocol</span></h4>
+
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'total_voters_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('totalVotersCount')"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'voters_received_ballots_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votersReceivedBallotsCount')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'upfront_voters_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('upfrontVotersCount')"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'home_voters_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('homeVotersCount')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'station_voters_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('stationVotersCount')"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'dropped_out_voters_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('droppedOutVotersCount')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'ballots_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('ballotsCount')"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'filled_ballots_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('filledBallotsCount')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'damaged_ballots_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('damagedBallotsCount')"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'unused_ballots_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('unusedBallotsCount')"
+        ></zubr-client-input>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-6 word-break-break-word">
+        <b class="candidate-field" translate>dmitriev</b>
+      </div>
+      <div class="col-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'votes_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votesCountDmitriev')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-6 word-break-break-word">
+        <b class="candidate-field" translate>kanapatskaya</b>
+      </div>
+      <div class="col-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'votes_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votesCountKonopatskaya')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-6 word-break-break-word">
+        <b class="candidate-field" translate>lukashenko</b>
+      </div>
+      <div class="col-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'votes_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votesCountLukashenko')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-6 word-break-break-word">
+        <b class="candidate-field" translate>tihanovskaya</b>
+      </div>
+      <div class="col-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'votes_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votesCountTihanovskaya')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-6 word-break-break-word">
+        <b class="candidate-field" translate>cherechen</b>
+      </div>
+      <div class="col-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'votes_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votesCountCherechen')"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-6 word-break-break-word">
+        <b class="candidate-field" translate>against_all</b>
+      </div>
+      <div class="col-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'votes_count',
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('votesCountAgainsAll')"
+        ></zubr-client-input>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-md-12 height-90px">
+        <mat-radio-group [formControl]="this.form.get('fromOutside')">
+          <mat-radio-button [value]="false"><span translate>observer_on_station</span></mat-radio-button>
+          <mat-radio-button [value]="true"><span translate>observer_out_of_station</span></mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <h4><span translate>turnout_data</span></h4>
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'number_voters_from_observer',
+            required: true,
+            type: 'number',
+            maxLength: 5
+          }"
+          [formControl]="form.get('numberVotersFromObserver')"
+        ></zubr-client-input>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-md-12" *ngIf="commission && commission.id">
+        <angular-file-uploader
+          #uploaderComponent
+          [config]="
+          {
+              formatsAllowed: '.jpg,.jpeg,.png',
+              maxSize: '50',
+              theme: 'dragNDrop',
+              hideResetBtn: true,
+              fileNameIndex: true,
+              uploadAPI:  {
+                url: 'https://api.zubr.in/commission/' + commission.id + '/upload',
+                method: 'POST'
+              },
+              replaceTexts: {
+                selectFileBtn: 'select_files' | translate,
+                resetBtn: 'reset' | translate,
+                uploadBtn: 'upload' | translate,
+                dragNDropBox:'drag_and_drop' | translate,
+                attachPinBtn: 'attach_files' | translate,
+                afterUploadMsg_success: 'successfully_uploaded' | translate,
+                afterUploadMsg_error: 'upload_failed' | translate,
+                sizeLimit: 'size_limit' | translate
+              }
+          }">
+        </angular-file-uploader>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3" *ngIf="error">
+    <div class="col-md-12">
+      <div class="alert alert-danger w-100">
+        {{ error }}
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-primary dialog-dynamic-title">
+          <span translate>dont_work_form_use_bot</span>: <a href="https://t.me/zubr_assist_bot">@zubr_assist_bot</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-warning dialog-dynamic-title">
+          <span translate>upload_photo_to_send</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-6 mt-1">
+      <zubr-client-button
+        class="float-left"
+        (click)="submit()"
+        [options]="{
+          label: 'send',
+          disabled: (loading$ | async),
+          appearance: 'flat'
+        }"
+      >
+      </zubr-client-button>
+      <mat-spinner class="float-left" *ngIf="loading$ | async" [diameter]="30"></mat-spinner>
+    </div>
+    <div class="col-6 mt-1">
+      <zubr-client-button
+        class="float-right"
+        (click)="dialogRef.close()"
+        [options]="{
+          label: 'close',
+          appearance: 'stroked'
+        }"
+      >
+      </zubr-client-button>
+    </div>
+  </div>
+</div>
+

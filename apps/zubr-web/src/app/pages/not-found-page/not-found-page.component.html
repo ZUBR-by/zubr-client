@@ -1,0 +1,12 @@
+<div class="my-3 mx-3 mx-md-0">
+  <div class="alert alert-warning" [innerHTML]="'page_not_found' | translate"></div>
+  <div>
+    <zubr-client-button
+      [routerLink]="['/elections']"
+      [options]="{
+                    label: 'return_to_homepage',
+                    appearance: 'flat'
+                  }">
+    </zubr-client-button>
+  </div>
+</div>

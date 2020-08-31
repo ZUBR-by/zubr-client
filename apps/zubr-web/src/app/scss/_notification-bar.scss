@@ -1,0 +1,17 @@
+zubr-client-notification-bar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 200px;
+  background-color: #ffffff;
+  height: 100%;
+  overflow: hidden;
+  word-break: break-word;
+  display: none;
+}
+
+@media only screen and (min-width: 990px) {
+  zubr-client-notification-bar {
+    display: block;
+  }
+}

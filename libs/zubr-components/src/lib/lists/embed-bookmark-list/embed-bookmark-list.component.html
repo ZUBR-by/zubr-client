@@ -1,0 +1,30 @@
+<table *ngIf="(bookmarks$ | async).length > 0" class="table">
+  <thead>
+  <tr>
+    <th scope="col" translate>organization</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let bookmark of bookmarks$ | async">
+    <th scope="row">
+      <a class="d-block w-100 h-100" [routerLink]="[bookmark.url]">{{ bookmark.label }}</a>
+    </th>
+  </tr>
+  </tbody>
+</table>
+<div class="row"
+     *ngIf="(bookmarks$ | async).length == 0">
+  <div class="col-md-12">
+    <div class="alert alert-primary" translate>no_bookmarks_found</div>
+    <zubr-client-button
+      class="mx-3 mx-md-0"
+      [routerLink]="['/elections/commissions']"
+      [options]="{
+        icon: 'account_balance',
+        label: 'commissions',
+        appearance: 'flat'
+      }"
+    >
+    </zubr-client-button>
+  </div>
+</div>

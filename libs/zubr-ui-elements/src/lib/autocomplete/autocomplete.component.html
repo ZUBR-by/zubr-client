@@ -1,0 +1,25 @@
+<mat-form-field class="field-full-width" appearance="{{ options.appearance || 'fill' }}">
+  <mat-label>{{ options.label | translate }}</mat-label>
+  <input matInput
+         placeholder="{{ options.placeholder ? (options.placeholder | translate) : (options.label | translate) }}"
+         type="{{ options.type ? options.type : 'text' }}"
+         [matAutocomplete]="auto"
+         [readonly]="options.readonly"
+         [formControl]="formControl"
+         [required]="options.required">
+  <mat-icon class="cursor-pointer"
+            *ngIf="formControl.value"
+            (click)="formControl.reset()"
+            matSuffix>
+    clear
+  </mat-icon>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options.dataSource.entities$ | async" [value]="option[options.suggestedKey]">
+      <span>{{option[options.suggestedKey]}}</span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngFor="let message of formControlErrorMessages">
+    {{ message | translate }}
+  </mat-error>
+  <mat-hint>{{ options.hint | translate }}</mat-hint>
+</mat-form-field>

@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ options.title | translate }}</h1>
+<mat-dialog-content>
+  <p [innerHTML]=" options.content | translate"></p>
+</mat-dialog-content>
+<mat-dialog-actions class="float-right">
+  <zubr-client-button class="col-md-auto"
+    *ngIf="!options.disableCancellation"
+    [options]="{
+      label: options.noLabel ? options.noLabel : 'no',
+      appearance: 'stroked'
+    }"
+    [mat-dialog-close]=false
+  ></zubr-client-button>
+  <zubr-client-button class="col-md-auto"
+    *ngIf="!options.disableConfirmation"
+    [options]="{
+      label: options.yesLabel ? options.yesLabel : 'yes',
+      appearance: 'flat',
+      focus: true
+    }"
+    [mat-dialog-close]=true
+    ></zubr-client-button>
+</mat-dialog-actions>

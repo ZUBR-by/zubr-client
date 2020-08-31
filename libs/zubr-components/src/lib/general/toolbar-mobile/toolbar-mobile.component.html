@@ -1,0 +1,54 @@
+<div class="toolbar-mobile w-100 position-fixed">
+  <div class="float-left w-20 h-100 my-auto">
+    <a class="toolbar-item d-block h-100 w-100 text-center"
+       [routerLink]="['/elections/members']" routerLinkActive="active">
+      <div class="toolbar-mobile-icon">
+        <i class="material-icons">assignment_ind</i>
+      </div>
+      <div class="toolbar-mobile-description" translate>members_short</div>
+    </a>
+  </div>
+  <div class="float-left w-20 h-100 my-auto">
+    <a class="toolbar-item d-block h-100 w-100 text-center"
+       [routerLink]="['/elections/commissions']" routerLinkActive="active">
+      <div class="toolbar-mobile-icon">
+        <i class="material-icons">account_balance</i>
+      </div>
+      <div class="toolbar-mobile-description" translate>commissions</div>
+    </a>
+  </div>
+  <div class="float-left w-20 h-100 my-auto">
+    <a class="toolbar-item d-block h-100 w-100 text-center"
+       [routerLink]="['/elections/map']" routerLinkActive="active">
+      <div class="toolbar-mobile-icon">
+        <i class="material-icons">map</i>
+      </div>
+      <div class="toolbar-mobile-description" translate>map</div>
+    </a>
+  </div>
+  <div class="float-left w-20 h-100 my-auto">
+    <a class="toolbar-item d-block h-100 w-100 text-center"
+       [routerLink]="['/elections/bookmarks']"
+       routerLinkActive="active">
+      <div class="toolbar-mobile-icon">
+        <i class="material-icons"
+           matBadge="{{ bookmarksCount$ | async }}"
+           matBadgeOverlap="false">
+          bookmarks
+        </i>
+      </div>
+      <div class="toolbar-mobile-description" translate>subscriptions</div>
+    </a>
+  </div>
+  <div class="float-left w-20 h-100 my-auto">
+    <a class="toolbar-item d-block h-100 w-100 text-center"
+       [routerLink]="['/elections/results']" routerLinkActive="active">
+      <div class="toolbar-mobile-icon">
+        <i class="material-icons">
+          article
+        </i>
+      </div>
+      <div class="toolbar-mobile-description" translate>Результаты</div>
+    </a>
+  </div>
+</div>

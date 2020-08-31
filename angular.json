@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "projects": {
+    "zubr-web": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/zubr-web",
+      "sourceRoot": "apps/zubr-web/src",
+      "prefix": "zubr-client",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/zubr-web",
+            "index": "apps/zubr-web/src/index.html",
+            "main": "apps/zubr-web/src/main.ts",
+            "polyfills": "apps/zubr-web/src/polyfills.ts",
+            "tsConfig": "apps/zubr-web/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/zubr-web/src/favicon.ico",
+              "apps/zubr-web/src/assets",
+              "apps/zubr-web/src/.well-known",
+              "apps/zubr-web/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/zubr-web/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/zubr-web/src/environments/environment.ts",
+                  "with": "apps/zubr-web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "aot": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/zubr-web/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "zubr-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "zubr-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "zubr-web:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/zubr-web/tsconfig.app.json",
+              "apps/zubr-web/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/zubr-web/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/zubr-web/jest.config.js",
+            "tsConfig": "apps/zubr-web/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/zubr-web/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "zubr-store": {
+      "projectType": "library",
+      "root": "libs/zubr-store",
+      "sourceRoot": "libs/zubr-store/src",
+      "prefix": "zubr-client",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/zubr-store/tsconfig.lib.json",
+              "libs/zubr-store/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/zubr-store/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/zubr-store/jest.config.js",
+            "tsConfig": "libs/zubr-store/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/zubr-store/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "zubr-common": {
+      "projectType": "library",
+      "root": "libs/zubr-common",
+      "sourceRoot": "libs/zubr-common/src",
+      "prefix": "zubr-client",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/zubr-common/tsconfig.lib.json",
+              "libs/zubr-common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/zubr-common/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/zubr-common/jest.config.js",
+            "tsConfig": "libs/zubr-common/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/zubr-common/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "zubr-ui-elements": {
+      "projectType": "library",
+      "root": "libs/zubr-ui-elements",
+      "sourceRoot": "libs/zubr-ui-elements/src",
+      "prefix": "zubr-client",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/zubr-ui-elements/tsconfig.lib.json",
+              "libs/zubr-ui-elements/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/zubr-ui-elements/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/zubr-ui-elements/jest.config.js",
+            "tsConfig": "libs/zubr-ui-elements/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/zubr-ui-elements/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "zubr-components": {
+      "projectType": "library",
+      "root": "libs/zubr-components",
+      "sourceRoot": "libs/zubr-components/src",
+      "prefix": "zubr-client",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/zubr-components/tsconfig.lib.json",
+              "libs/zubr-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/zubr-components/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/zubr-components/jest.config.js",
+            "tsConfig": "libs/zubr-components/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/zubr-components/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "zubr-web"
+}

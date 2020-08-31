@@ -1,0 +1,66 @@
+<div class="zubr-loading-container"
+     [hidden]="(messageLoading$ | async) === false">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+
+<div class="row my-3" *ngIf="viewError">
+  <div class="col-md-12">
+    <zubr-client-page-not-found [message]="'message_not_found'"></zubr-client-page-not-found>
+  </div>
+</div>
+
+<div class="col-md-12" *ngIf="(entity$ | async) as message">
+  <div class="row my-3">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <h2><span translate>incident</span> #{{ message.id }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>general_information</h3>
+              <div class="alert background-gray">
+                <p *ngIf="message.commission"><b translate>commission</b>: <a [routerLink]="['/elections/commission/' + message.commission.id]">{{ message.commission.name }}: {{ message.commission.description }}</a></p>
+                <p><b translate>commission_code</b>: <b class="color-secondary">{{message.commissionCode}}</b></p>
+                <p><b translate>categories</b>:
+                  <span *ngFor="let category of message.categories; let i = index"
+                        class="text-color-ui-control font-weight-bold">
+                  {{ 'violation_type_'+category | translate }}<span *ngIf="i+1 < message.categories.length">,</span></span></p>
+                <p><b translate>added_at</b>: {{ message.createdAt | date : 'dd/MM/yyyy hh:mm'}}</p>
+                <p><b translate>initiative</b>: <span class="badge badge-success">{{ 'initiative_' + message.initiative | translate }}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>attachments</h3>
+              <div *ngIf="message.attachments.length > 0" class="alert background-gray">
+                <div class="row">
+                  <div *ngFor="let attachment of message.attachments; let i = index" class="col-6 mb-2 text-center attachment-box">
+                    <a class="btn btn-primary w-100" href="{{attachment.url}}" target="_blank">
+                      <span translate>file</span> #{{i+1}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-primary" *ngIf="message.attachments.length <= 0">
+                <span translate>no_attachments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-12">
+      <h3 translate>description</h3>
+      <p *ngIf="message.description">{{message.description}}</p>
+      <div *ngIf="!message.description" class="alert alert-primary" translate>no_description</div>
+    </div>  </div>
+</div>

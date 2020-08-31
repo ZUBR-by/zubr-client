@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="zubr-card-tabs row px-3">
+        <a class="zubr-card-tab col-md-3 d-none d-md-block"
+           *ngFor="let pageTab of pageTabs | slice:0:5;"
+           [routerLink]="[pageTab.url]"
+           [routerLinkActive]="'active d-block'">
+          <div class="zubr-card-tab-label px-3">
+            <i class="material-icons">
+              {{ pageTab.metadata.favicon ? pageTab.metadata.favicon : 'create_new_folder' }}
+            </i>
+            <span>{{pageTab.metadata.title | translate}}</span>
+            <button class="close-tab d-none d-md-block"
+                    [hidden]="pageTabs.length <= 1">
+              <i class="material-icons"
+                 (click)="close(pageTab, $event)"
+                 [hidden]="pageTabs.length <= 1">
+                clear
+              </i>
+            </button>
+          </div>
+          <div class="caret"></div>
+        </a>
+        <a class="zubr-card-tab col-md-2"
+           *ngIf="pageTabs.length > 5"
+           (click)="extraPageTabs.open()">
+          <i class="material-icons">
+            menu
+          </i>
+          <mat-form-field class="zubr-page-tabs-select">
+            <mat-select #extraPageTabs [panelClass]="'zubr-page-tabs-select'">
+              <mat-option
+                *ngFor="let pageTab of pageTabs | slice:5;"
+                [routerLink]="[pageTab.url]">
+                <i class="material-icons">
+                  {{ pageTab.metadata.favicon ? pageTab.metadata.favicon : 'create_new_folder' }}
+                </i>  <span>{{pageTab.metadata.title | translate}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

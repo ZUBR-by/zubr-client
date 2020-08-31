@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "in.zubr.twa",
+    "sha256_cert_fingerprints": ["5F:EE:EC:EA:9C:CD:60:DF:8C:E1:82:D0:CE:44:AF:D5:0F:DA:85:C9:4E:E8:B6:ED:DA:D5:7B:54:12:A9:DB:C5"] }
+}]

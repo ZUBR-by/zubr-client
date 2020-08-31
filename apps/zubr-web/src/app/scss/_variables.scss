@@ -1,0 +1,68 @@
+@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/variables';
+@import '~@angular/material/theming';
+
+// Global color variables
+
+$zubr-body-color: #f5f5f5;
+$zubr-border-color: #e0e0e0;
+$zubr-primary-color: #02c39a;
+$zubr-primary-hover-color: #02efc4;
+$zubr-secondary-color: #05668d;
+$zubr-ui-control-color: #00a896;
+$zubr-font-primary-color: #028090;
+$zubr-font-secondary-color: #FA7F25;
+$zubr-element-white-hover-color: #e9f9ee;
+$zubr-sidebar-primary-color: #ffffff;
+$zubr-grey: #999999;
+
+// Bootstrap theming
+
+$theme-colors: (
+  "primary": $zubr-primary-color
+);
+
+// Material UI theming
+
+@include mat-core();
+
+$mat-zubr-primary: (
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: $zubr-ui-control-color,
+  600: #1e88e5,
+  700: #1976d2,
+  800: #1565c0,
+  900: #0d47a1,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$custom-theme-primary: mat-palette($mat-zubr-primary);
+$custom-theme-accent: mat-palette($mat-orange, A200, A100, A400);
+$custom-theme-warn: mat-palette($mat-red);
+
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+
+@include angular-material-theme($custom-theme);

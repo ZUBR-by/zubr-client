@@ -1,0 +1,193 @@
+@import "~bootstrap/scss/mixins";
+
+.navbar {
+  padding: 15px 10px;
+  border-radius: 0;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
+}
+
+
+//SIDEBAR
+.wrapper {
+  width: 100%;
+}
+
+zubr-client-sidebar {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  min-width: 200px;
+  max-width: 200px;
+  transition: all 0.3s;
+  font-size: 14px;
+  background: $zubr-sidebar-primary-color;
+  color: $zubr-font-primary-color;
+  z-index: 5;
+  overflow-x: visible;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  &.active{
+    margin-left: -200px;
+  }
+
+  .logo{
+    display: block;
+    margin: 0 auto;
+    span{
+      display: block;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .sidebar-account {
+    a {
+      display: block;
+      width: 100%;
+      color: $zubr-sidebar-primary-color !important;
+      font-weight: 500;
+      font-size: 16px;
+      &:hover {
+        color: $zubr-secondary-color !important;
+      }
+    }
+  }
+
+  .sidebar-separator {
+    border-top: 1px solid #ececec;
+  }
+
+  .sidebar-section-title {
+    color: $zubr-secondary-color;
+    font-weight: lighter;
+  }
+
+  ul.components{
+    padding: 0;
+  }
+  ul{
+    &.subscriptions-menu {
+      overflow: auto;
+      li {
+        &.subscription-menu-item {
+          font-size: 10px;
+          height: auto;
+          overflow: auto;
+          a {
+            overflow: auto;
+            .row {
+              line-height: 10px;
+            }
+          }
+        }
+      }
+    }
+    li {
+      font-weight: 500;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 5px;
+      transition: 0.1s background-color;
+      > ul {
+        margin-left: 0px;
+        li {
+          font-size: 14px;
+        }
+      }
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: inherit;
+        padding: 0 15px;
+        &:hover{
+          color: inherit !important;
+          text-decoration: none;
+          background-color: $zubr-element-white-hover-color;
+        }
+        &.active {
+          color: #ffffff !important;
+          background-color: $zubr-ui-control-color;
+          &:hover {
+            //background-color: $zubr-primary-color;
+            color: #ffffff !important;
+          }
+        }
+        i {
+          display: inline-flex;
+          vertical-align: middle;
+          padding-right: 10px;
+        }
+        .sidebar-item-icon {
+          width: 35px;
+        }
+        .sidebar-item-text {
+          width: calc(100% - 35px);
+          line-height: 18px;
+          letter-spacing: 0.1px;
+          font-weight: initial;
+        }
+      }
+    }
+  }
+  @include media-breakpoint-down(md){
+    margin-left: -200px;
+    &.active {
+      margin-left: 0;
+    }
+  }
+}
+
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.sidebar-content {
+  margin: 0 200px 50px 200px;
+}
+
+.sidebar-content-wrapper {
+  width: 100%;
+}
+
+@media only screen and (min-width: 1430px) {
+  .sidebar-content-wrapper {
+    //width: 960px;
+  }
+}
+
+@include media-breakpoint-down(md)  {
+  zubr-client-sidebar {
+    width: 100%;
+  }
+  .sidebar-content {margin-left: 0; margin-right: 0}
+}
+
+.sidebar-footer-logo {
+  width: 100px;
+  display: none;
+}

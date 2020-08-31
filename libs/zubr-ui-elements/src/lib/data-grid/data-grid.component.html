@@ -1,0 +1,84 @@
+<table cdk-table
+       [dataSource]="dataGridOptions.dataSource"
+       matSort
+       matSortDisableClear
+       class="table table-hover zubr-table">
+  <ng-container
+    *ngFor="let column of dataGridOptions.columns"
+    cdkColumnDef="{{column.label}}">
+    <th class="d-none d-md-table-cell text-capitalize"
+        [class.d-table-cell]="column.visibleOnMobile"
+        cdk-header-cell
+        mat-sort-header
+        [disabled]="column.disableSorting"
+        *cdkHeaderCellDef>
+      <span translate>{{column.displayName}}</span>
+    </th>
+    <td cdk-cell *cdkCellDef="let element"
+        class="d-none d-md-table-cell"
+        [class.d-table-cell]="column.visibleOnMobile">
+      <a [ngSwitch]="column.displayType" [routerLink]="[dataGridOptions.routerLinkPrefix + element[dataGridOptions.routerLinkKey]]" class="data-grid-cell-link">
+        <span *ngSwitchCase="'image'">
+          <div class="data-grid-image">
+            <img src="{{element[column.label] ? element[column.label] : './assets/images/user.svg'}}"
+                 (error)="dataGridImage.src = './assets/images/user.svg'"
+                 #dataGridImage>
+          </div>
+        </span>
+        <span *ngSwitchCase="'array'">
+          <span class="d-block"
+                [class.embed-member-name]="column.titled"
+                [class.font-size-9px]="column.fontSizeSmall"
+                [ngClass]="{ 'badge badge-secondary' : column.badged }">
+            <span *ngFor="let item of element[column.label]; let j = index">
+              {{ column.labelPrefix ?
+              (column.labelPrefix + '_' + item | translate) :
+                item
+              }}<span *ngIf="j+1 < element[column.label].length">, </span>
+            </span>
+          </span>
+        </span>
+        <span *ngSwitchCase="'date'">
+          <span class="d-block"
+                [class.embed-member-name]="column.titled"
+                [class.font-size-9px]="column.fontSizeSmall"
+                [ngClass]="{ 'badge badge-secondary' : column.badged }">
+            {{ element[column.label] | date : 'dd/MM/yyyy HH:mm' }}
+          </span>
+        </span>
+        <span *ngSwitchDefault>
+          <span class="d-block"
+                [class.embed-member-name]="column.titled"
+                [class.font-size-9px]="column.fontSizeSmall"
+                [ngClass]="{ 'badge badge-secondary' : column.badged }">
+            {{ column.labelPrefix ?
+            (column.labelPrefix + '_' + element[column.label] | translate) :
+            element[column.label]
+            }}
+          </span>
+        </span>
+        </a>
+    </td>
+  </ng-container>
+  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+  <tr cdk-row
+      *cdkRowDef="let row; columns: displayedColumns;"
+      [routerLink]="[dataGridOptions.routerLinkPrefix + row[dataGridOptions.routerLinkKey]]">
+  </tr>
+</table>
+<div class="zubr-loading-container"
+     [hidden]="(dataGridOptions.dataSource.loading$ | async) === false">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+<div *ngIf="(dataGridOptions.dataSource.entities$ | async) === null"
+     [hidden]="dataGridOptions.dataSource.loading$ | async"
+    class="alert alert-primary col-md-12">
+  {{ dataGridOptions.emptyMessageTitle | translate }}
+</div>
+<mat-paginator
+  class="zubr-data-grid-paginator"
+  [length]="dataGridOptions.totalPageCount | async"
+  [pageSize]="dataGridOptions.entityOptions.count"
+  [pageSizeOptions]="[10, 25, 50, 100]"
+  showFirstLastButtons>
+</mat-paginator>

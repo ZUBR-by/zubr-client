@@ -1,0 +1,53 @@
+<div>
+
+  <a [routerLink]="['/elections']" class="img logo mx-5 mt-3">
+    <img alt="Logo" src="assets/images/logo.svg?v=1">
+  </a>
+
+    <div class="my-3 mx-3 sidebar-account">
+      <a [routerLink]="['/register']" translate>login_register</a>
+    </div>
+
+  <div class="sidebar-separator m-3"></div>
+
+  <ul class="list-unstyled components mb-3">
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/map']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            all_inbox
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>inbox</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/members']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            people
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>my_observers</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+
+</div>

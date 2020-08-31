@@ -1,0 +1,168 @@
+<div class="zubr-loading-container"
+     [hidden]="(entityLoading$ | async) === false">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+
+<div class="row my-3" *ngIf="viewError">
+  <div class="col-md-12">
+    <zubr-client-page-not-found [message]="'member_not_found'"></zubr-client-page-not-found>
+  </div>
+</div>
+
+<div class="col-md-12" *ngIf="(entity$ | async) as member">
+
+  <div class="row my-3">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row my-2">
+            <div class="col-md-12">
+              <div class="member-detail-photo mx-auto text-center">
+                <img alt="Member photo"
+                     src="{{
+                   member.photoUrl ? member.photoUrl
+                   : './assets/images/user.svg'
+                   }}"/>
+              </div>
+              <div class="embed-member-origin text-center" *ngIf="member.photoUrl">
+                <a href="{{member.photoOrigin}}" target="_blank" translate>photo_origin</a>
+              </div>
+            </div>
+            <div class="col-md-12 text-center mt-3">
+              <h2>{{ member.fullName }}</h2>
+              <div class="row my-3 px-2">
+                <share-buttons [include]="['facebook','vk','telegram','print','whatsapp', 'twitter', 'sms','email','print','copy']"
+                               [show]="4"
+                               [size]="-4"
+                               [title]="member.fullName + ' — ' + member.commission.name + ' «'+member.commission.description+'»'"
+                               [description]="member.fullName + ' — ' + member.commission.name + ' «'+member.commission.description+'»'"
+                               [image]="member.photoUrl"
+                               [tags]="'#выборы #беларусь #2020'"
+                               [autoSetMeta]="false"
+                ></share-buttons>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>general_information</h3>
+              <div class="alert background-gray">
+                <p><b translate>commission</b>:
+                  <a [routerLink]="['/elections/commission/' + member.commission.id]"
+                     target="_blank"
+                      class="text-decoration-underline">
+                    {{ member.commission.name }}: {{ member.commission.description }}
+                  </a>
+                </p>
+                <p [ngSwitch]="member.positionType">
+                  <span *ngSwitchCase="0">
+                    <b translate>position_in_commission</b>: <span translate>regular_member</span>
+                  </span>
+                  <span *ngSwitchCase="1">
+                    <b translate>position_in_commission</b>: <span translate>commission_manager</span>
+                  </span>
+                  <span *ngSwitchCase="2">
+                    <b translate>position_in_commission</b>: <span translate>commission_sub_manager</span>
+                  </span>
+                  <span *ngSwitchCase="3">
+                    <b translate>position_in_commission</b>: <span translate>commission_secretary</span>
+                  </span>
+                </p>
+                <p *ngIf="member.workTitle">
+                  <b translate>work_title</b>:
+                  <span>{{ member.workTitle }}</span>
+                </p>
+                <p *ngIf="member.description">
+                  <b translate>directed_by</b>:
+                  <a *ngIf="member.referral"
+                     target="_blank"
+                     [routerLink]="['/elections/organization/'+ member.referral.id]"
+                     class="text-decoration-underline">
+                    {{ member.referral.name }}
+                  </a>
+                  <span *ngIf="!member.referral">{{ member.description }}</span>
+                  <!--                  <span class="label alert-danger" translate>pro_government</span>-->
+                </p>
+                <p *ngIf="member.employer">
+                  <b translate>employer</b>:
+                  <a [routerLink]="['/elections/organization/'+ member.employer.id]"
+                     class="text-decoration-underline">
+                    {{ member.employer.name }}
+                  </a>
+                  <span *ngIf="!member.referral">{{ member.description }}</span>
+                  <!--                  <span class="label alert-danger" translate>pro_government</span>-->
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-12">
+              <div class="alert alert-warning overflow-auto">
+                <div><b translate>have_information</b></div>
+                <div class="my-3" translate>have_information_about_member_activity</div>
+                <div class="my-3 mb-2">
+                  <zubr-client-button
+                    [routerLink]="['/elections/commission/' + member.commission.id]"
+                    [options]="{
+                    icon: 'folder_shared',
+                    label: 'share_information',
+                    appearance: 'flat'
+                  }">
+                  </zubr-client-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-12">
+              <div class="alert background-gray overflow-auto">
+                <div><b translate>it_is_me</b></div>
+                <div class="my-3"
+                     [innerHTML]="'why_i_am_here' | translate:{
+                     fullName: member.fullName
+                     }">
+                </div>
+                <zubr-client-button
+                  class="w-100 d-block"
+                  (click)="downloadMemo()"
+                  [options]="{
+                    icon: 'get_app',
+                    label: 'download_memo',
+                    appearance: 'flat'
+                  }">
+                </zubr-client-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>map_of_station</h3>
+              <div #memberMap id="memberMap" class="page-right-map"></div>
+              <div class="py-2 pt-3">
+                <zubr-client-button
+                  class="w-100 d-block"
+                  [routerLink]="['/elections/map']"
+                  [options]="{
+                    label: 'all_commission_on_map',
+                    appearance: 'stroked'
+                  }">
+                </zubr-client-button>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2" *ngIf="(members$ | async) as members">
+            <div class="col-md-12">
+              <h3>
+                <span translate>commission_colleagues</span>
+                <span> ({{ members.length }})</span>
+              </h3>
+              <zubr-client-embed-member-list [members]="members"></zubr-client-embed-member-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

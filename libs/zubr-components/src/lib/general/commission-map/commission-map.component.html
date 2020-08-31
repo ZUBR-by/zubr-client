@@ -1,0 +1,98 @@
+<div class="zubr-loading-container"
+     [hidden]="(loading$ | async) === false && loadingMap === false">
+  <mat-spinner class="mt-300" [diameter]="30"></mat-spinner>
+</div>
+<div class="col-md-12">
+  <div class="row mt-0 mt-md-3">
+    <h2 class="text-center text-md-left px-2 px-md-0 d-none d-md-block" translate>map_of_elections_in_belarus</h2>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="row overflow-hidden">
+    <div class="col-md-10">
+      <div class="row">
+        <div class="map-wrapper">
+          <zubr-client-autocomplete
+            class="map-input"
+            [formControl]="searchControl"
+            [options]="{
+              label: 'insert_address_of_station',
+              dataSource: placeDataSource,
+              suggestedKey: 'display_name',
+              entityOptions: {
+                type: 'places',
+                count: 10,
+                page: 0,
+                searchBy: '',
+                search: ''
+              }
+            }">
+          </zubr-client-autocomplete>
+          <div class="map-filter">
+            <div class="map-filter-description" translate>observation_requests</div>
+            <mat-button-toggle-group (change)="filterControl.setValue(this.$event.value);loadMap()">
+              <mat-button-toggle value="gte" [checked]="true">
+                <span translate>all</span>
+              </mat-button-toggle>
+              <mat-button-toggle value="lte">
+                <span translate>without_observer_requests</span>
+              </mat-button-toggle>
+              <mat-button-toggle value="gt">
+                <span translate>with_observer_requests</span>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <div class="map-legend-wrapper col-md-12">
+            <div class="row">
+              <div class="col-md-6 map-legend my-1">
+                <img src="./assets/images/station_icon.svg">&nbsp;&nbsp;
+                <span translate>station_for_vote</span>
+              </div>
+              <div class="col-md-6 map-legend my-1">
+                <span class="map-cluster-icon">N</span>&nbsp;&nbsp;
+                <span translate>number_of_stations_in_region</span>
+              </div>
+            </div>
+          </div>
+          <div id="map" class="map"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="row h-100">
+        <div class="map-right-sidebar">
+          <div class="map-counters">
+<!--            <div class="map-counter-box float-left col-6 col-md-12">-->
+<!--              <div class="map-counter-value">{{seconds | number:'1.0-2'}}</div>-->
+<!--              <div class="map-counter-desc" translate>time_left_before_campaign</div>-->
+<!--            </div>-->
+            <div class="map-counter-box float-left col-6 col-md-12 clickable" [routerLink]="['/elections/members']">
+              <div class="map-counter-value">65,572</div>
+              <div class="map-counter-desc" translate>people_counting_votes</div>
+            </div>
+            <div class="map-counter-box float-left col-6 col-md-12 clickable" [routerLink]="['/elections/commissions']">
+              <div class="map-counter-value">5,870</div>
+              <div class="map-counter-desc" translate>stations_to_vote</div>
+            </div>
+            <div class="map-counter-box float-left col-6 col-md-12 clickable" [routerLink]="['/elections/candidates']">
+              <div class="map-counter-value">5</div>
+              <div class="map-counter-desc" translate>presidential_candidates</div>
+            </div>
+            <div class="map-counter-box float-left col-6 col-md-12 clickable" [routerLink]="['/elections/organizations']">
+              <div class="map-counter-value">3,736</div>
+              <div class="map-counter-desc" translate>consignments_involved</div>
+            </div>
+<!--            <div class="map-counter-box float-left col-6 col-md-12 d-none d-md-block">-->
+<!--              <div class="map-counter-value">146</div>-->
+<!--              <div class="map-counter-desc" translate>users_are_following</div>-->
+<!--            </div>-->
+<!--            <div class="map-counter-box float-left col-6 col-md-12">-->
+<!--              <div class="map-counter-value">0</div>-->
+<!--              <div class="map-counter-desc" translate>observes_registered</div>-->
+<!--            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

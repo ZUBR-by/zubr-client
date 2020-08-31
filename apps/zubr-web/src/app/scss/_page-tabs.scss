@@ -1,0 +1,125 @@
+.zubr-page-tabs-header {
+  mat-tab-header {
+    display: none;
+  }
+  .mat-tab-body-content {
+    transform: none;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+.zubr-page-tabs-select {
+  display: block !important;
+  .mat-select-underline {
+    color: $zubr-font-primary-color;
+    font-weight: 600;
+  }
+
+  .mat-select-arrow {
+    display: none;
+  }
+  .mat-option-text {
+    color: $zubr-font-primary-color;
+    font-weight: 600;
+  }
+}
+
+.zubr-card {
+  background-color: #FFFFFF; // theming
+  border: 1px solid $zubr-border-color;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 400px;
+  position: relative;
+  transition: 1s;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.zubr-card-tabs {
+  .zubr-card-tab {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    .mat-form-field-underline {
+      display: none;
+    }
+    &.active {
+      .caret {
+        width: calc(100% - 7px);
+        height: 5px;
+        background-color: #FFFFFF; // theming
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        z-index: 3;
+      }
+      .zubr-card-tab-label {
+        color: $zubr-ui-control-color;
+        background-color: #FFFFFF; // theming
+        .close-tab {
+          i {
+            color: $zubr-ui-control-color;
+          }
+        }
+      }
+    }
+    .zubr-card-tab-label {
+      position: absolute;
+      width: calc(100% - 7px);
+      height: 100%;
+      left: 0;
+      bottom: 0;
+      background-color: $zubr-element-white-hover-color; // theming
+      border: none;
+      overflow: hidden;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+      .close-tab {
+        position: absolute;
+        right: 0;
+        top: -2px;
+        cursor: pointer;
+        background: transparent;
+        border: transparent;
+        outline: none;
+        z-index: 3;
+        color: $zubr-primary-color;
+        i {
+          border-radius: 5px;
+          padding: 0;
+          background-color: $zubr-element-white-hover-color;
+          &:hover {
+            background-color: darken($zubr-element-white-hover-color, 10);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm)  {
+  .zubr-card-tabs {
+    display: none;
+    .zubr-card-tab {
+      &.active {
+        .caret {
+          height: 0;
+        }
+      }
+      .zubr-card-tab-label {
+        left: 0;
+        width: 100%;
+        &.active {
+          background-color: $zubr-element-white-hover-color;
+        }
+      }
+    }
+  }
+}

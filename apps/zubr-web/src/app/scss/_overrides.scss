@@ -1,0 +1,148 @@
+body {
+  background-color: $zubr-body-color !important;
+  font-size: 14px !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: lighten($zubr-ui-control-color, 10);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $zubr-primary-color;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $zubr-primary-hover-color;
+}
+
+a {
+  color: $zubr-font-primary-color;
+  &:hover {
+    color: $zubr-primary-color !important;
+    text-decoration: none !important;
+  }
+  &.active {
+    &:hover {
+      color: $zubr-font-primary-color !important;
+    }
+  }
+}
+
+i {
+  display: inline-flex;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+h2 {
+  line-height: 20px !important;
+}
+
+h3 {
+  color: $zubr-secondary-color;
+  font-weight: bold !important;
+}
+
+h4 {
+  font-weight: bold !important;
+}
+
+.table-hover tbody tr:hover {
+  color: $zubr-font-primary-color;
+  background-color: $zubr-element-white-hover-color;
+}
+
+tr td[cdk-cell] a {
+  color: #212529;
+  &:hover {
+    color: $zubr-font-primary-color;
+  }
+}
+
+tr:hover td[cdk-cell] a {
+  color: $zubr-font-primary-color;
+  &:hover {
+    color: $zubr-font-primary-color !important;
+  }
+}
+
+.mat-form-field-wrapper {
+  margin: 0 !important;
+}
+
+.container-fluid {
+  &.zubr-tab-container {
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+.mat-form-field-wrapper label {
+  color: #B9BFCD;
+}
+
+button {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.mat-button-wrapper {
+  line-height: 16px;
+}
+
+.mat-stroked-button {
+  border-color: $zubr-primary-color !important;
+}
+
+/* Removes blue border around buttons after click */
+button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.mat-sort-header-button {
+  text-transform: capitalize;
+  color: #666666 !important;
+  padding: 0 !important;
+}
+
+.mat-sort-header-sorted {
+  .mat-sort-header-arrow, button span {
+    color: $zubr-secondary-color;
+  }
+}
+
+.alert {
+  border-radius: 0;
+}
+
+.btn-primary {
+  background-color: $zubr-font-secondary-color;
+  border: none;
+  &:hover {
+    background-color: lighten($zubr-font-secondary-color, 10%);
+    color: #ffffff !important;
+  }
+  &:active {
+    background-color: lighten($zubr-font-secondary-color, 10%) !important;
+  }
+}
+
+.table td.cdk-cell{
+  padding: 0;
+}
+
+.data-grid-cell-link{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0.75rem;
+}

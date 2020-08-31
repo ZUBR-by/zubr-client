@@ -1,0 +1,177 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        <span translate>become_an_observer</span>
+      </h3>
+      <p class="my-1 color-ui-control dialog-dynamic-title"
+         *ngIf="(options.commission | async) as commission">
+        {{commission.name}}: {{commission.description}}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+    <h4><span translate>your_data</span></h4>
+    <div class="row">
+      <div class="col-md-4 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'last_name',
+            hint: 'cyrillic_passport',
+            required: true,
+            type: 'text',
+            maxLength: 30
+          }"
+          [formControl]="lastName"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-4 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'first_name',
+            hint: 'cyrillic_passport',
+            required: true,
+            type: 'text',
+            maxLength: 30
+          }"
+          [formControl]="firstName"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-4 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'middle_name',
+            hint: 'cyrillic_passport',
+            required: true,
+            type: 'text',
+            maxLength: 30
+          }"
+          [formControl]="middleName"
+        ></zubr-client-input>
+      </div>
+    </div>
+    <h4><span translate>contacts</span></h4>
+    <div class="row mt-1">
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'mobile_phone',
+            required: true,
+            hint: 'bel_mobile_phone_hint',
+            type: 'number',
+            maxLength: 12,
+            prefix: '+'
+          }"
+          [formControl]="phone"
+        ></zubr-client-input>
+      </div>
+      <div class="col-md-6 height-90px">
+        <zubr-client-input
+          [options]="{
+            label: 'email',
+            required: true,
+            hint: 'valid_email_hint',
+            type: 'email',
+            maxLength: 50
+          }"
+          [formControl]="email"
+        ></zubr-client-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+    <h4><span translate>general_information</span></h4>
+    <div class="row">
+      <div class="col-md-6 height-90px">
+        <zubr-client-select
+          ngDefaultControl
+          [formControl]="observingDatesSel"
+          [options]="{
+            label: 'observing_dates',
+            hint: 'observing_dates_hint',
+            dataSource: observingDatesSelect,
+            multiple: true
+          }">
+        </zubr-client-select>
+      </div>
+      <div class="col-md-6">
+        <zubr-client-slide-toggle
+          ngDefaultControl
+          [options]="{
+            label: 'ready_to_change'
+          }"
+          [formControl]="readyToChange"
+        ></zubr-client-slide-toggle>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-checkbox formControlName="has18"><span translate>i_am_adult</span></mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 my-3">
+    <h4><span translate>initiative</span></h4>
+    <div class="row form-field-hint">
+      <div class="col-md-6 pb-3" translate>choose_an_initiative</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-radio-group aria-labelledby="initiative" [formControl]="initiative">
+          <mat-radio-button [value]="2">
+            <img class="height-50px" src="./assets/images/hp_logo_footer.svg">
+          </mat-radio-button>
+          <mat-radio-button [value]="1">
+            <img class="height-50px" src="./assets/images/pv_logo.png">
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-6">
+        <div class="row mt-3">
+          <div class="col-md-12" *ngIf="initiative.value">
+            <div class="alert alert-info dialog-dynamic-title" [innerHTML]=" ('by_sending_request_message_' + initiative.value) | translate "></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3" *ngIf="error">
+    <div class="col-md-12">
+      <div class="alert alert-danger w-100">
+        {{ error }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-6 mt-1">
+      <zubr-client-button
+        (click)="has18.value && initiative.value ? submit() : false"
+        [options]="{
+          label: 'send',
+          disabled: !(has18.value && initiative.value) || (loading$ | async),
+          appearance: 'flat'
+        }"
+      >
+      </zubr-client-button>
+    </div>
+    <div class="col-6 mt-1">
+      <zubr-client-button
+        class="float-right"
+        (click)="dialogRef.close()"
+        [options]="{
+          label: 'close',
+          appearance: 'stroked'
+        }"
+      >
+      </zubr-client-button>
+    </div>
+  </div>
+</form>
+

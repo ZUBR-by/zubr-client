@@ -1,0 +1,30 @@
+<mat-form-field
+  class="field-full-width"
+  appearance="{{ options.appearance || 'fill' }}"
+>
+  <mat-label>{{ options.label | translate }}</mat-label>
+
+  <mat-select
+    [multiple]="options.multiple"
+    placeholder="{{
+      options.placeholder
+        ? (options.placeholder | translate)
+        : (options.label | translate)
+    }}"
+    [formControl]="formControl"
+    [required]="options.required"
+  >
+    <mat-option
+      *ngFor="let option of options.dataSource"
+      [value]="option.value"
+    >
+      {{ option.label || option.value | translate }}
+    </mat-option>
+  </mat-select>
+
+  <mat-error *ngFor="let message of formControlErrorMessages">
+    {{ message | translate }}
+  </mat-error>
+
+  <mat-hint>{{ options.hint | translate }}</mat-hint>
+</mat-form-field>

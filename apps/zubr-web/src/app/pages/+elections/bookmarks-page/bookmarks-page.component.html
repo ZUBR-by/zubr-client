@@ -1,0 +1,41 @@
+<div class="row my-3">
+  <div class="col-md-4 mb-sm-4 mb-md-0 text-center text-md-left">
+    <h2 class="list-title-line-height" translate>my_subscriptions</h2>
+  </div>
+</div>
+
+<div class="row my-3">
+  <div class="col-md-12">
+    <zubr-client-embed-bookmark-list></zubr-client-embed-bookmark-list>
+  </div>
+</div>
+
+<div class="row px-3 px-md-0">
+  <div class="col-md-6 my-3 text-center text-md-left">
+    <h2 class="list-title-line-height" translate>additional_information</h2>
+    <ul class="non-styled-ul">
+      <p>
+        <b translate>useful_links</b>:
+      </p>
+      <li><a [routerLink]="['/elections/messages']"
+             class="color-ui-control cursor-pointer" translate>incidents</a></li>
+      <li><a [routerLink]="['/elections/organizations']"
+             class="color-ui-control cursor-pointer" translate>organizations</a></li>
+      <li><a [routerLink]="['/elections/candidates']"
+             class="color-ui-control cursor-pointer" translate>candidates</a></li>
+      <li><a [routerLink]="['/elections/about']"
+             class="color-ui-control cursor-pointer" translate>about</a></li>
+    </ul>
+  </div>
+  <div class="col-md-6 my-3 text-center text-md-left">
+    <h2 class="list-title-line-height" translate>my_settings</h2>
+    <p>
+      <b translate>language</b>:
+    </p>
+    <ul class="non-styled-ul">
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('ru')" translate>russian</a></li>
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('be')" translate>belarusian</a></li>
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('en')" translate>english</a></li>
+    </ul>
+  </div>
+</div>

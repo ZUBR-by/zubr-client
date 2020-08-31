@@ -1,0 +1,73 @@
+<div class="d-flex align-items-center">
+  <div class="mr-2 {{ options?.searchFieldClass }}">
+    <zubr-client-input
+      class="list-operations-field"
+      [formControl]="dataGridOptions.searchControl"
+      [options]="{ label: options?.placeholder ? options?.placeholder : 'search', icon: 'search', placeholder: options?.placeholder }">
+    </zubr-client-input>
+  </div>
+  <div class="mr-2" *ngIf="searchFilterMode">
+    <zubr-client-select
+      class="list-operations-field"
+      ngDefaultControl
+      [options]="{ label: 'search_in_column', dataSource: searchKeyDataSource }"
+      [formControl]="dataGridOptions.searchKeyControl"
+    ></zubr-client-select>
+  </div>
+  <div class="mr-2 list-operations-filter-button list-operations-field-padding"
+       *ngIf="options?.searchFilter?.enabled && !searchFilterMode; else closeFilter">
+    <zubr-client-button
+      (click)="switchToSearchFilterMode()"
+      [options]="{
+        appearance: 'icon',
+        icon: 'filter_list'
+      }"
+    >
+    </zubr-client-button>
+  </div>
+  <ng-template #closeFilter>
+    <div class="mr-2 list-operations-filter-button list-operations-field-padding"
+         *ngIf="options?.searchFilter?.enabled && searchFilterMode">
+      <zubr-client-button
+        (click)="exitSearchFilterMode()"
+        [options]="{
+                appearance: 'icon',
+                icon: 'close'
+              }">
+      </zubr-client-button>
+    </div>
+  </ng-template>
+  <div class="mr-2 list-operations-field-padding"
+       *ngIf="options?.importButton && options?.importButton?.enabled">
+    <zubr-client-button
+      (click)="uploader.click()"
+      [options]="{
+              label: 'import',
+              appearance: 'default',
+              icon: 'cloud_upload',
+              disabled: dataGridOptions.dataSource.loading$ | async
+          }">
+    </zubr-client-button>
+    <input
+      type="file"
+      id="file"
+      #uploader
+      hidden
+      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+      (change)="handleFileInput($event)"
+    />
+  </div>
+  <div *ngIf="options?.primaryButton && options?.primaryButton?.enabled"
+       class="list-operations-field-padding {{ options?.primaryButton?.class }}">
+    <zubr-client-button
+      class="float-right"
+      [options]="{
+              label: options?.primaryButton?.label,
+              icon: options?.primaryButton.icon,
+              appearance: options?.primaryButton?.appearance ? options?.primaryButton?.appearance : 'flat',
+              disabled: dataGridOptions.dataSource.loading$ | async,
+              routerLink: options?.primaryButton?.routerLink
+              }">
+    </zubr-client-button>
+  </div>
+</div>

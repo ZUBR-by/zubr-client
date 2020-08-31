@@ -1,0 +1,98 @@
+<div class="zubr-loading-container"
+     [hidden]="(organizationLoading$ | async) === false">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+
+<div class="row my-3" *ngIf="viewError">
+  <div class="col-md-12">
+    <zubr-client-page-not-found [message]="'organization_not_found'"></zubr-client-page-not-found>
+  </div>
+</div>
+
+<div class="col-md-12" *ngIf="(entity$ | async) as organization">
+
+  <div class="row my-3">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>{{ organization.name }}</h2>
+        </div>
+      </div>
+      <h4 class="color-ui-control font-weight-bold">{{ organization.location }}</h4>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>general_information</h3>
+              <div class="alert background-gray">
+                <p><b translate>legal_entity</b>: <span class="text-color-ui-control font-weight-bold">{{ organization.name }}</span></p>
+                <p><b translate>address</b>: {{ organization.location }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>on_map</h3>
+              <div #organizationMap id="organizationMap" class="page-right-map"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="zubr-loading-container"
+               [hidden]="(membersLoading$ | async) === false">
+            <mat-spinner [diameter]="30"></mat-spinner>
+          </div>
+          <div class="row my-2" *ngIf="(members$ | async) as members">
+            <div class="col-md-12">
+              <h3>
+                <span translate>members_of_commission_from_organization</span>
+              </h3>
+              <div *ngIf="members.length == 0"
+                   class="alert alert-primary" translate>in_processing</div>
+              <zubr-client-embed-member-list
+                [type]="'organization'"
+                [members]="members | slice:0:4">
+              </zubr-client-embed-member-list>
+              <div class="my-2 alert background-gray">
+                <zubr-client-button
+                  [routerLink]="['/elections/members']"
+                  [options]="{
+                  icon: 'supervisor_account',
+                  label: 'show_all_members',
+                  appearance: 'flat'
+                }"></zubr-client-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row my-2" *ngIf="(employees$ | async) as employees">
+            <div class="col-md-12">
+              <h3>
+                <span translate>members_of_commission_employed_by_organization</span>
+              </h3>
+              <div *ngIf="employees.length == 0"
+                   class="alert alert-primary" translate>in_processing</div>
+              <zubr-client-embed-member-list
+                [type]="'organization'"
+                [members]="employees | slice:0:4">
+              </zubr-client-embed-member-list>
+              <div class="my-2 alert background-gray">
+                <zubr-client-button
+                  [routerLink]="['/elections/members']"
+                  [options]="{
+                  icon: 'supervisor_account',
+                  label: 'show_all_members',
+                  appearance: 'flat'
+                }"></zubr-client-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

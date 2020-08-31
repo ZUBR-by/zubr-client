@@ -1,0 +1,48 @@
+stages:
+  - build
+  - deploy
+
+build:
+  cache:
+    paths:
+      - node_modules/
+  stage: build
+  image: node:12.16.3
+  only:
+    refs:
+      - master
+      - develop
+  artifacts:
+    paths:
+      - dist/apps/zubr-web/*
+      - infrastructure/*
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - 'which envsubst || ( apt-get update -y && apt-get install gettext gettext-base -y )'
+    - npm install
+    - envsubst < apps/zubr-web/src/assets/env/env.template.js > apps/zubr-web/src/assets/env/env.js
+    - npm run test
+    - npm run lint
+    - npm run web:prod
+
+deploy:
+  stage: deploy
+  image: kissmy/ansistrano:latest
+  only:
+    refs:
+      - master
+      - develop
+  dependencies:
+    - build
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - printf "$DEPLOY_HOST\n" >> infrastructure/hosts
+    - ansible-playbook -i infrastructure/hosts -u $DEPLOY_USER infrastructure/ansistrano_${CI_COMMIT_REF_NAME}_deploy.yml -v
+

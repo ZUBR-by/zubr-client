@@ -1,0 +1,52 @@
+<ng-container [ngSwitch]="options.appearance">
+  <button
+    *ngSwitchDefault
+    mat-button
+    [color]="options.color || 'primary'"
+    [routerLink]="options.routerLink ? [options.routerLink] : undefined"
+    [disabled]="options.disabled"
+    (click)="click($event)"
+    [attr.cdkFocusInitial]="options.focus"
+  >
+    <mat-icon *ngIf="options.icon">{{ options.icon }}</mat-icon>
+    {{ options.label | translate | uppercase }}
+  </button>
+
+  <button
+    *ngSwitchCase="'stroked'"
+    mat-stroked-button
+    [color]="options.color || 'primary'"
+    [routerLink]="options.routerLink ? [options.routerLink] : undefined"
+    [disabled]="options.disabled"
+    (click)="click($event)"
+    [attr.cdkFocusInitial]="options.focus"
+  >
+    <mat-icon *ngIf="options.icon">{{ options.icon }}</mat-icon>
+    {{ options.label | translate | uppercase }}
+  </button>
+
+  <button
+    *ngSwitchCase="'flat'"
+    mat-flat-button
+    [color]="options.color || 'primary'"
+    [routerLink]="options.routerLink ? [options.routerLink] : undefined"
+    [disabled]="options.disabled"
+    (click)="click($event)"
+    [attr.cdkFocusInitial]="options.focus"
+  >
+    <mat-icon *ngIf="options.icon">{{ options.icon }}</mat-icon>
+    {{ options.label | translate | uppercase }}
+  </button>
+
+  <button
+    *ngSwitchCase="'icon'"
+    mat-icon-button
+    [color]="options.color || 'primary'"
+    [routerLink]="options.routerLink ? [options.routerLink] : undefined"
+    [disabled]="options.disabled"
+    (click)="click($event)"
+    [attr.cdkFocusInitial]="options.focus"
+  >
+    <mat-icon>{{ options.icon }}</mat-icon>
+  </button>
+</ng-container>

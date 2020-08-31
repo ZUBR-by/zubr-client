@@ -1,0 +1,29 @@
+<mat-form-field class="field-full-width" appearance="{{ options.appearance || 'fill' }}">
+
+  <mat-label>{{ options.label | translate }}</mat-label>
+  <span *ngIf="options.prefix" matPrefix>{{options.prefix}} &nbsp;</span>
+  <input matInput
+         placeholder="{{ (options.placeholder ? options.placeholder : options.label) | translate }}"
+         type="{{ type ? type : 'text' }}"
+         autocomplete="off"
+         (keyup)="onKeyUp()"
+         [ngxMatDatetimePicker]="picker"
+         [attr.maxlength]="options.maxLength ? options.maxLength : null"
+         [attr.minlength]="options.minLength ? options.minLength : null"
+         [formControl]="formControl"
+         [required]="options.required">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false">
+  </ngx-mat-datetime-picker>
+  <mat-icon *ngIf="icon" (click)="datepickerIconClicked()" matSuffix>
+    {{ icon }}
+  </mat-icon>
+
+  <mat-error *ngFor="let message of formControlErrorMessages">
+    {{ message | translate }}
+  </mat-error>
+
+  <mat-hint>{{ options.hint | translate }}</mat-hint>
+
+</mat-form-field>
+<div class="datepicker-overlay" (click)="picker.open()"></div>

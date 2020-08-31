@@ -1,0 +1,61 @@
+<div class="zubr-loading-container"
+     [hidden]="!!members">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+<div class="embed-members-list col-md-12">
+  <div *ngFor="let member of displayedMembers; let i = index">
+    <div *ngIf="!(i % 2)" class="row">
+      <div class="col-md-6 embed-member-item embed-member-item-group"
+           [class.manager]="member.positionType === 1"
+           [routerLink]="['/elections/member/' + member.id]">
+        <div class="embed-member-photo my-2 mx-md-auto float-left float-md-none text-md-center">
+          <img src="{{member.photoUrl ? member.photoUrl : './assets/images/user.svg'}}">
+        </div>
+        <div class="embed-member-info ml-2 ml-md-0 py-2 mx-md-auto float-left float-md-none text-md-center">
+          <div class="embed-member-name mb-2 color-secondary"><i *ngIf="member.positionType === 1" class="material-icons">star</i>{{member.fullName}}</div>
+          <div [ngSwitch]="member.positionType" class="embed-member-position-wrapper">
+            <span *ngSwitchCase="0" class="embed-member-position regular" translate>regular_member</span>
+            <span *ngSwitchCase="1" class="embed-member-position manager" translate>commission_manager</span>
+            <span *ngSwitchCase="2" class="embed-member-position sub-manager" translate>commission_sub_manager</span>
+            <span *ngSwitchCase="3" class="embed-member-position secretary" translate>commission_secretary</span>
+          </div>
+          <div class="embed-member-origin text-left text-md-center" *ngIf="member.photoUrl">
+            <a href="{{member.photoOrigin}}" target="_blank" translate>photo_origin</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 embed-member-item embed-member-item-group"
+           *ngIf="members[i+1]"
+           [class.manager]="members[i+1].positionType === 1"
+           [routerLink]="['/elections/member/' + members[i+1].id]">
+        <div class="embed-member-photo my-2 mx-md-auto float-left float-md-none text-md-center">
+          <img src="{{members[i+1].photoUrl ? members[i+1].photoUrl : './assets/images/user.svg'}}"
+               (error)="commissionMemberImage.src = './assets/images/user.svg'"
+               #commissionMemberImage/>
+        </div>
+        <div class="embed-member-info ml-2 ml-md-0 py-2 mx-md-auto float-left float-md-none text-md-center">
+          <div class="embed-member-name mb-2 color-secondary"><i *ngIf="members[i+1].positionType === 1" class="material-icons">star</i>{{members[i+1].fullName}}</div>
+          <div [ngSwitch]="members[i+1].positionType" class="embed-member-position-wrapper">
+            <span *ngSwitchCase="0" class="embed-member-position regular" translate>regular_member</span>
+            <span *ngSwitchCase="1" class="embed-member-position manager" translate>commission_manager</span>
+            <span *ngSwitchCase="2" class="embed-member-position sub-manager" translate>commission_sub_manager</span>
+            <span *ngSwitchCase="3" class="embed-member-position secretary" translate>commission_secretary</span>
+          </div>
+          <div class="embed-member-origin text-left text-md-center" *ngIf="member.photoUrl">
+            <a href="{{member.photoOrigin}}" target="_blank" translate>photo_origin</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="expandable" class="my-2 alert background-gray">
+  <zubr-client-button
+    (click)="expand()"
+    [options]="{
+                  icon: 'supervisor_account',
+                  label: expanded ? 'hide' : 'show_all_members',
+                  appearance: 'flat'
+                }">
+  </zubr-client-button>
+</div>

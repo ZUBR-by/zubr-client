@@ -1,0 +1,9 @@
+<mat-slide-toggle [formControl]="formControl">
+  {{ options.label | translate }}
+</mat-slide-toggle>
+
+<ng-content *ngIf="formControl.value"></ng-content>
+
+<mat-error *ngFor="let message of formControlErrorMessages">
+  {{ message | translate }}
+</mat-error>

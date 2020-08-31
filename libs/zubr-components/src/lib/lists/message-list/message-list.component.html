@@ -1,0 +1,76 @@
+<div class="row my-3">
+  <div class="col-md-4 mb-sm-4 mb-md-0 text-center text-md-left">
+    <h2 class="list-title-line-height" translate>incidents</h2>
+  </div>
+  <div class="col-md-8">
+    <div class="float-right w-100">
+      <zubr-client-list-operations-panel
+        [dataGridOptions]="dataGridOptions"
+        [options]="{
+          primaryButton: {
+            enabled: false,
+            appearance: 'flat',
+            icon: 'gps_fixed',
+            label: 'map',
+            class: 'col-4',
+            routerLink: '/elections/map'
+          },
+          importButton: {
+            enabled: false,
+            entity: 'Message'
+          },
+          searchFilter: {
+            enabled: false
+          },
+          searchFieldClass: 'col-12',
+          placeholder: 'search'
+      }">
+      </zubr-client-list-operations-panel>
+      <mat-form-field appearance="fill" class="col-md-12">
+        <mat-label>{{ 'categories' | translate }}</mat-label>
+        <mat-select [formControl]="dataGridOptions.additionalFilterControl" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category.value">{{ category.label | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-12">
+    <mat-button-toggle-group
+      class="mx-3 mx-md-3"
+      name="fontStyle"
+      (change)="dataGridOptions.additionalFilterControl2.patchValue($event.value)">
+      <mat-button-toggle value="" [checked]="true">
+        <span class="font-size-9px" translate>all</span>
+      </mat-button-toggle>
+      <mat-button-toggle value="0">
+        <img class="toggle-image" src="./assets/images/pzsv.png">
+        <span class="font-size-9px" translate>initiative_0_short</span>
+      </mat-button-toggle>
+      <mat-button-toggle value="1">
+        <img class="toggle-image" src="./assets/images/pv_logo.png">
+        <span class="font-size-9px" translate>initiative_1_short</span>
+      </mat-button-toggle>
+      <mat-button-toggle value="2">
+        <img class="toggle-image"src="./assets/images/hp.png">
+        <span class="font-size-9px" translate>initiative_2_short</span>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+
+<div class="row my-2 mx-0 mx-md-0">
+  <div class="col-md-12">
+    <div class="alert alert-warning" translate>messages_disclaimer</div>
+  </div>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-12">
+    <zubr-client-data-grid
+      [dataGridOptions]="dataGridOptions">
+    </zubr-client-data-grid>
+  </div>
+</div>
