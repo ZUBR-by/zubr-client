@@ -309,11 +309,11 @@ export class CommissionDetailPageComponent implements OnInit, OnDestroy {
               updatedView
             );
 
-            const d: Document = document;
-            const s: any = d.createElement('script');
-            s.src = 'https://https-zubr-in.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', new Date().toString());
-            (d.head || d.body).appendChild(s);
+            // const d: Document = document;
+            // const s: any = d.createElement('script');
+            // s.src = 'https://https-zubr-in.disqus.com/embed.js';
+            // s.setAttribute('data-timestamp', new Date().toString());
+            // (d.head || d.body).appendChild(s);
 
             },       500
           );
