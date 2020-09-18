@@ -13,15 +13,15 @@ pipeline {
         agent {
             docker {
                 image 'node:12.16.3'
-                args '-v ${PWD}:/usr/src/client -w /usr/src/client'
-                reuseNode true
             }
         }
         environment {
             API_URL = 'https://zubr.club'
+            HOME = '.'
+            npm_config_cache = 'npm-cache'
         }
         steps {
-            sh 'npm install'
+            sh 'npm ci'
             sh 'npm run test'
             sh 'npm run lint'
             sh 'npm run web:prod'
