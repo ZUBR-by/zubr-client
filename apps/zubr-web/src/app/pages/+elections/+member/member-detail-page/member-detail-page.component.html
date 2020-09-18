@@ -28,8 +28,13 @@
                 <a href="{{member.photoOrigin}}" target="_blank" translate>photo_origin</a>
               </div>
             </div>
+
+
             <div class="col-md-12 text-center mt-3">
               <h2>{{ member.fullName }}</h2>
+              <mat-chip-list *ngIf="member.tags.includes('/tag/2019')">
+                <mat-chip color="primary" selected translate>tag_2019</mat-chip>
+              </mat-chip-list>
               <div class="row my-3 px-2">
                 <share-buttons [include]="['facebook','vk','telegram','print','whatsapp', 'twitter', 'sms','email','print','copy']"
                                [show]="4"

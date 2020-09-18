@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
 import { ListOperationsPanelModule } from '../../general/list-operations-panel';
 import { EmbedMemberListComponent } from './embed-member-list.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 /**
  * Member list module
@@ -18,13 +19,14 @@ import { EmbedMemberListComponent } from './embed-member-list.component';
   exports: [
     EmbedMemberListComponent,
   ],
-  imports: [
-    CommonModule,
-    ZubrUiElementsModule,
-    RouterModule,
-    TranslateModule,
-    ListOperationsPanelModule,
-    MatProgressSpinnerModule,
-  ],
+    imports: [
+        CommonModule,
+        ZubrUiElementsModule,
+        RouterModule,
+        TranslateModule,
+        ListOperationsPanelModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+    ],
 })
 export class EmbedMemberListModule { }

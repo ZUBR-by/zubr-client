@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
  * @returns {TranslateHttpLoader}
  */
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json?var=8');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json?var=9');
 }
 
 /**

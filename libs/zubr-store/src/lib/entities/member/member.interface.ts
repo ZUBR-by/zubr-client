@@ -57,4 +57,9 @@ export interface Member {
    * @description
    */
   employer: Organization;
+  /**
+   * Entity field
+   * @description
+   */
+  tags: string[]
 }
