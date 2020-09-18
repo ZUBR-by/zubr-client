@@ -1,0 +1,50 @@
+pipeline {
+  agent any
+  options {
+    disableConcurrentBuilds()
+  }
+  stages {
+    stage('Pre-Build') {
+        steps {
+            sh 'envsubst < apps/zubr-web/src/assets/env/env.template.js > apps/zubr-web/src/assets/env/env.js'
+        }
+    }
+    stage('Build') {
+        agent {
+            docker {
+                image 'node:12.16.3'
+                args '-v ${PWD}:/usr/src/client -w /usr/src/client'
+                reuseNode true
+            }
+        }
+        environment {
+            API_URL = 'https://zubr.club'
+        }
+        steps {
+            sh 'npm install'
+            sh 'npm run test'
+            sh 'npm run lint'
+            sh 'npm run web:prod'
+
+            stash includes: 'dist/apps/zubr-web/**', name: 'output'
+            stash includes: 'infrastructure/*', name: 'infra'
+        }
+    }
+    stage('Deploy') {
+        environment {
+            FRONTEND_HOST   = credentials('FRONTEND_HOST')
+        }
+        steps {
+            unstash 'infra'
+            unstash 'output'
+            ansiblePlaybook(
+               playbook: 'infrastructure/ansistrano_master_deploy.yml',
+               inventory: "$FRONTEND_HOST,",
+               credentialsId: "SSH_PRIVATE_KEY",
+               hostKeyChecking: false
+           )
+        }
+    }
+  }
+}
+
