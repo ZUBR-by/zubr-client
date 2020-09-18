@@ -18,6 +18,9 @@
             <span *ngSwitchCase="1" class="embed-member-position manager" translate>commission_manager</span>
             <span *ngSwitchCase="2" class="embed-member-position sub-manager" translate>commission_sub_manager</span>
             <span *ngSwitchCase="3" class="embed-member-position secretary" translate>commission_secretary</span>
+            <mat-chip-list *ngIf="member.tags.includes('/tag/2019')">
+              <mat-chip>2019</mat-chip>
+            </mat-chip-list>
           </div>
           <div class="embed-member-origin text-left text-md-center" *ngIf="member.photoUrl">
             <a href="{{member.photoOrigin}}" target="_blank" translate>photo_origin</a>

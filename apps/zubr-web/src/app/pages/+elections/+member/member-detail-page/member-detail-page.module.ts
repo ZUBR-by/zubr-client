@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,7 +9,6 @@ import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { MemberDetailPageComponent } from './member-detail-page.component';
-import {MatChipsModule} from "@angular/material/chips";
 
 export const routes: Routes = [
   {
@@ -25,16 +25,16 @@ export const routes: Routes = [
  */
 @NgModule({
   declarations: [MemberDetailPageComponent],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        ZubrUiElementsModule,
-        TranslateModule,
-        MatProgressSpinnerModule,
-        ZubrComponentsModule,
-        ShareButtonsModule,
-        ShareIconsModule,
-        MatChipsModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ZubrUiElementsModule,
+    TranslateModule,
+    MatProgressSpinnerModule,
+    ZubrComponentsModule,
+    ShareButtonsModule,
+    ShareIconsModule,
+    MatChipsModule,
+  ],
 })
-export class MemberDetailPageModule { }
+export class MemberDetailPageModule {}

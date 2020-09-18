@@ -61,5 +61,5 @@ export interface Member {
    * Entity field
    * @description
    */
-  tags: string[]
+  tags: string[];
 }
