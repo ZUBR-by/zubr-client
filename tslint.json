@@ -40,7 +40,7 @@
     "max-classes-per-file": [true, 1],
     "max-line-length": [true, { "limit": 160, "ignore-pattern": "^import |^export {(.*?)}" }],
     "max-file-line-count": [true, 500],
-    "completed-docs": true,
+    "completed-docs": false,
     "member-access": [true, "check-parameter-property", "check-accessor", "check-constructor"],
     "member-ordering": [
       true,
