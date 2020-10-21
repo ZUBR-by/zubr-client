@@ -26,7 +26,7 @@
   width: 100%;
 }
 
-zubr-client-sidebar {
+zubr-client-sidebar, zubr-client-sidebar-courts {
   margin: 0;
   padding: 0;
   position: fixed;
@@ -181,7 +181,7 @@ a[data-toggle="collapse"] {
 }
 
 @include media-breakpoint-down(md)  {
-  zubr-client-sidebar {
+  zubr-client-sidebar, zubr-client-sidebar-courts {
     width: 100%;
   }
   .sidebar-content {margin-left: 0; margin-right: 0}

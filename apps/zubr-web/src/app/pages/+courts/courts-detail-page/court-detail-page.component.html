@@ -1,0 +1,213 @@
+<div class="zubr-loading-container"
+     [hidden]="(commissionLoading$ | async) === false">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+
+<div class="row my-3" *ngIf="viewError">
+  <div class="col-md-12">
+    <zubr-client-page-not-found [message]="'commission_not_found'"></zubr-client-page-not-found>
+  </div>
+</div>
+
+<div class="col-md-12" *ngIf="(entity$ | async) as commission">
+
+  <div class="row my-3">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>{{ commission.name }}</h2>
+        </div>
+        <div class="col-md-6 mb-3 mb-md-0">
+          <zubr-client-button
+            class="float-md-right mr-1 mr-md-0 mb-1"
+            *ngIf="commission.type === 1 || commission.type === 2"
+            (click)="onObserverModalOpened()"
+            [options]="{
+                    icon: 'policy',
+                    label: 'become_an_observer',
+                    appearance: 'flat'
+                  }">
+          </zubr-client-button>
+          <zubr-client-button
+            *ngIf="!(isBookmarked$ | async)"
+            (click)="addBookmark(commission.description)"
+            class="float-md-right mr-1 mb-1"
+            [options]="{
+                    icon: 'bookmarks',
+                    label: 'follow',
+                    appearance: 'stroked'
+                  }">
+          </zubr-client-button>
+          <zubr-client-button
+            *ngIf="(isBookmarked$ | async)"
+            (click)="removeBookmark()"
+            class="float-md-right mr-1 mb-1"
+            [options]="{
+                    icon: 'remove_circle_outline',
+                    label: 'un_follow',
+                    appearance: 'primary'
+                  }">
+          </zubr-client-button>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-12 px-3">
+          <strong>Прием сообщений и фотографий протоколов остановлен. Спасибо, что предоставляли нам информацию. </strong>
+          <br>
+<!--          <zubr-client-button-->
+<!--            *ngIf="commission.type === 1 || commission.type === 2"-->
+<!--            class="register-incident-button mr-2 mb-2"-->
+<!--            (click)="onRegisterViolationModal()"-->
+<!--            [options]="{-->
+<!--                        icon: 'add_alert',-->
+<!--                        label: 'registration_of_incident',-->
+<!--                        appearance: 'flat'-->
+<!--                      }">-->
+<!--          </zubr-client-button>-->
+<!--          <zubr-client-button-->
+<!--            *ngIf="commission.type === 2"-->
+<!--            class="mr-2 mb-2"-->
+<!--            (click)="onReportModal()"-->
+<!--            [options]="{-->
+<!--                      icon: 'record_voice_over',-->
+<!--                      label: 'report_turnout',-->
+<!--                      appearance: 'primary'-->
+<!--                    }"-->
+<!--          ></zubr-client-button>-->
+          <zubr-client-button
+            class="mr-2 mb-2"
+            [routerLink]="['/elections/commission/' + commission.id]"
+            fragment="comments"
+            [options]="{
+                      icon: 'chat',
+                      label: 'discuss_activity',
+                      appearance: 'primary'
+                    }"
+          ></zubr-client-button>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-12 px-3">
+          <a class="color-secondary" href="https://api.zubr.in/commissions/{{commission.id}}/print" target="_blank">
+            <b><i class="material-icons">print</i><span translate>print_flyer</span></b>
+          </a>&nbsp;&nbsp;
+          <a class="color-secondary" href="https://api.zubr.in/commissions/{{commission.id}}/print/text" target="_blank">
+            <b><i class="material-icons">print</i><span translate>print_flyer_text</span></b>
+          </a>&nbsp;&nbsp;
+          <a *ngIf="commission.type === 1 || commission.type === 2"
+             class="color-secondary cursor-pointer"
+             (click)="onPublicReportModal()">
+            <b><i class="material-icons">receipt_long</i><span translate>send_protocol</span></b>
+          </a>
+        </div>
+      </div>
+      <div class="row my-3 px-2">
+        <share-buttons [include]="['facebook','vk','telegram','whatsapp', 'twitter', 'sms','email','print','copy']"
+                       [show]="4"
+                       [size]="-4"
+                       [title]="commission.name + ' «' + commission.description + '»'"
+                       [description]="commission.name + ' «' + commission.description + '»'"
+                       [image]="'https://zubr.in/assets/images/zubr_og_image.png?v=2'"
+                       [tags]="'#выборы #беларусь #2020'"
+                       [autoSetMeta]="false"
+        ></share-buttons>
+      </div>
+      <div *ngIf="commission.type == 2" class="row my-3">
+        <div class="col-md-12">
+          <div class="alert alert-warning" *ngIf="commission.applied == 0">
+            <b translate>attention</b><br>
+            <div [innerHTML]="'this_commission_is_not_covered_by_observation' | translate"></div>
+          </div>
+          <div class="alert alert-primary"
+               *ngIf="commission.applied > 0">
+            <span translate>number_of_observer_requests</span>: <span class="font-weight-bold">{{commission.applied}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>general_information</h3>
+              <div class="alert background-gray">
+                <p><b translate>legal_entity</b>: <span class="text-color-ui-control font-weight-bold">{{ commission.description }}</span></p>
+                <p><b translate>address</b>: {{ commission.location }}</p>
+                <p><b translate>type</b>:
+                  <span [ngSwitch]="commission.type">
+                    <span *ngSwitchCase="0" translate>central_commission</span>
+                    <span *ngSwitchCase="1" translate>territorial_commission</span>
+                    <span *ngSwitchCase="2" translate>station_commission</span>
+                  </span>
+                </p>
+                <p><b translate>code</b>: <b class="color-secondary">{{ commission.code }}</b></p>
+                <p *ngIf="commission.parent"><b translate>parent_commission</b>:
+                  <a [routerLink]="['/elections/commission/' + commission.parent.id]">{{ commission.parent.name }}</a>
+                </p>
+<!--                <p *ngIf="commission.area"><b translate>commission_area</b>: {{ commission.area }}</p>-->
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-12">
+              <h3 translate>map_of_station</h3>
+              <div #commissionMap id="commissionMap" class="page-right-map"></div>
+              <div class="py-2 pt-3">
+                <zubr-client-button
+                  class="w-100 d-block"
+                  [routerLink]="['/elections/map']"
+                  [options]="{
+                    icon: 'gps_fixed',
+                    label: 'all_commission_on_map',
+                    appearance: 'stroked'
+                  }">
+                </zubr-client-button>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2" *ngIf="commission.type == 2">
+            <div class="col-md-12">
+              <h3 translate>turnout</h3>
+              <div class="alert alert-primary">
+                <div [innerHTML]="'in_processing' | translate"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="zubr-loading-container"
+               [hidden]="(membersLoading$ | async) === false">
+            <mat-spinner [diameter]="30"></mat-spinner>
+          </div>
+          <div class="row my-2" *ngIf="(members$ | async) as members">
+            <div class="col-md-12">
+              <h3>
+                <span translate>members_of_station</span>
+                <span> ({{ members.length }})</span>
+              </h3>
+              <div *ngIf="members.length == 0"
+                   class="alert alert-primary" translate>in_processing</div>
+              <zubr-client-embed-member-list [members]="members" [expandable]="true"></zubr-client-embed-member-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="commission.type === 1 || commission.type === 2" class="row my-2">
+    <div class="col-md-12">
+      <h3 translate>incidents</h3>
+      <zubr-client-data-grid
+        [dataGridOptions]="dataGridOptions">
+      </zubr-client-data-grid>
+    </div>
+  </div>
+
+  <div class="row my-2" id="comments">
+    <div class="col-md-12">
+      <h3 translate>discussion_of_commission_activity</h3>
+      <div id="disqus_thread"></div>
+    </div>
+  </div>
+
+</div>

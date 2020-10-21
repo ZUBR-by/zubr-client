@@ -1,0 +1,115 @@
+<div>
+
+  <a [routerLink]="['/elections']" class="img logo mx-5 mt-3">
+    <img alt="Logo" src="assets/images/logo.svg?v=1">
+  </a>
+
+  <div class="sidebar-separator m-3"></div>
+
+  <ul class="list-unstyled components mb-3">
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/courts/start']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            account_balance
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>main</div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/courts/list']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            people
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>courts</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+<!--    <li>-->
+<!--      <a class="align-self-center"-->
+<!--         [routerLink]="['/elections/organizations']"-->
+<!--         [routerLinkActive]="'active'">-->
+<!--        <div class="sidebar-item-icon float-left">-->
+<!--          <i class="material-icons">-->
+<!--            flag-->
+<!--          </i>-->
+<!--        </div>-->
+<!--        <div class="sidebar-item-text float-left h-100 align-middle">-->
+<!--          <div class="container d-flex h-100">-->
+<!--            <div class="row justify-content-center align-self-center"-->
+<!--                 translate>organizations</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </a>-->
+<!--    </li>-->
+
+  </ul>
+  <div class="sidebar-separator m-3"></div>
+
+  <ul class="list-unstyled components mb-3">
+
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/about']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            favorite
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>about</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+
+  <div class="sidebar-separator m-3"></div>
+
+  <div class="mx-3 mb-3 text-center">
+    <ul class="non-styled-ul sidebar-language-items">
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('ru')" translate>russian</a></li>
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('be')" translate>belarusian</a></li>
+      <li><a class="color-ui-control cursor-pointer" (click)="changeLanguage('en')" translate>english</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="sidebar-mobile d-block d-md-none w-100 position-fixed">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-3">
+        <a [routerLink]="['/elections/map']" routerLinkActive="active">
+          <i class="material-icons">
+            favorite
+          </i>
+        </a>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
  * @class MapPageComponent
  */
 @Component({
-  selector: 'zubr-client-map-page',
-  templateUrl: './map-page.component.html',
+  selector: 'zubr-client-courts-landing',
+  templateUrl: './landing.component.html',
 })
-export class MapPageComponent {}
+export class LandingComponent {}

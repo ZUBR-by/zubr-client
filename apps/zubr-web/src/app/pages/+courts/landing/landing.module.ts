@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ZubrComponentsModule } from '@zubr-client/zubr-components';
-import { MapPageComponent } from './map-page.component';
+import { LandingComponent } from './landing.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: MapPageComponent,
+    component: LandingComponent,
   },
 ];
 
@@ -18,11 +18,11 @@ export const routes: Routes = [
  * @class MapPageModule
  */
 @NgModule({
-  declarations: [MapPageComponent],
+  declarations: [LandingComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ZubrComponentsModule,
   ],
 })
-export class MapPageModule { }
+export class LandingModule { }

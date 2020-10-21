@@ -9,8 +9,10 @@ import { PageNotFoundModule } from './general/page-not-found';
 import { PageTabsModule } from './general/page-tabs';
 import { SidebarModule } from './general/sidebar';
 import { SidebarAdminModule } from './general/sidebar-admin';
+import { SidebarCourtsModule } from './general/sidebar-courts';
 import { ToolbarMobileModule } from './general/toolbar-mobile';
 import { CommissionListModule } from './lists/commission-list/commission-list.module';
+import { CourtListModule } from './lists/court-list/court-list.module';
 import { EmbedBookmarkListModule } from './lists/embed-bookmark-list';
 import { EmbedMemberListModule } from './lists/embed-member-list';
 import { MemberListModule } from './lists/member-list/member-list.module';
@@ -29,10 +31,11 @@ import { OrganizationListModule } from './lists/organization-list/organization-l
     ListOperationsPanelModule,
     PageTabsModule,
     SidebarModule,
+    SidebarCourtsModule,
     ToolbarMobileModule,
     CommissionListModule,
     MemberListModule,
-    CommissionListModule,
+    CourtListModule,
     CommissionMapModule,
     EmbedMemberListModule,
     PageNotFoundModule,

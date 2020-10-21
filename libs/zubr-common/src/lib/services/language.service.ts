@@ -32,7 +32,6 @@ export class LanguageService {
    * @param language
    */
   public changeLanguage(language: string): void {
-    this._translateService.setDefaultLang(language);
     this._translateService.use(language);
     localStorage.setItem('language', language);
   }

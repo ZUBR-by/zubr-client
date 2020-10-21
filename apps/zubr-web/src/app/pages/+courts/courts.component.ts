@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'zubr-client-elections',
+  selector: 'zubr-client-courts',
   templateUrl: './courts.component.html',
 
 })

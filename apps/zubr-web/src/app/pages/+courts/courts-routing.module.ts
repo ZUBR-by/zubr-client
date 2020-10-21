@@ -11,15 +11,27 @@ export const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'map',
+        redirectTo: 'start',
         pathMatch: 'full',
+      },
+      {
+        path: 'list',
+        loadChildren: () => import(
+          './court-list-page/court-list-page.module'
+          ).then(m => m.CourtListPageModule),
+        data: {
+          title: 'courts',
+          favicon: 'account_balance',
+          navigateToPageTab: true,
+        },
+        canActivate: [PageGuardService],
       },
 
       {
-        path: 'map',
+        path: 'start',
         loadChildren: () => import(
-          './map-page/map-page.module'
-          ).then(m => m.MapPageModule),
+          './landing/landing.module'
+          ).then(m => m.LandingModule),
         data: {
           title: 'map_of_elections',
           favicon: 'map',
