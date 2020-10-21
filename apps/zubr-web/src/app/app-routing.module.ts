@@ -4,8 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/landing-page/landing-page.module')
-      .then(m => m.LandingPageModule),
+    redirectTo: 'courts',
+    pathMatch: 'full',
+  },
+  {
+    path: 'courts',
+    loadChildren: () => import('./pages/+courts/courts.module')
+      .then(m => m.CourtsModule),
   },
   {
     path: 'elections',
