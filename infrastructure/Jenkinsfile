@@ -4,11 +4,6 @@ pipeline {
     disableConcurrentBuilds()
   }
   stages {
-    stage('Pre-Build') {
-        steps {
-            sh 'envsubst < apps/zubr-web/src/assets/env/env.template.js > apps/zubr-web/src/assets/env/env.js'
-        }
-    }
     stage('Build') {
         agent {
             docker {
@@ -21,6 +16,10 @@ pipeline {
             npm_config_cache = 'npm-cache'
         }
         steps {
+            script {
+                env.BRANCH = GIT_BRANCH.replace("origin/", "")
+            }
+            echo "${env.BRANCH}"
             sh 'npm ci'
             sh 'npm run test'
             sh 'npm run lint'
@@ -32,13 +31,23 @@ pipeline {
     }
     stage('Deploy') {
         environment {
-            FRONTEND_HOST   = credentials('FRONTEND_HOST')
+            FRONTEND_HOST = credentials('FRONTEND_HOST')
+            API_URL       = credentials('API_URL')
         }
         steps {
+            writeFile file: 'dist/apps/zubr-web/assets/env/env.js', text: """
+(function(window) {
+    window['env'] = window['env'] || {};
+
+    // default Environment variables
+    window['env']['apiUrl'] = '$API_URL';
+})(this);c
+"""
             unstash 'infra'
             unstash 'output'
+
             ansiblePlaybook(
-               playbook: 'infrastructure/ansistrano_master_deploy.yml',
+               playbook: "infrastructure/ansistrano_${env.BRANCH}_deploy.yml",
                inventory: "$FRONTEND_HOST,",
                credentialsId: "SSH_PRIVATE_KEY",
                hostKeyChecking: false

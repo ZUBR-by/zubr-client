@@ -4,7 +4,7 @@
   vars:
     ansible_python_interpreter: '/usr/bin/python'
     ansistrano_deploy_via: rsync
-    ansistrano_deploy_to: "/frontend_dev"
+    ansistrano_deploy_to: "/web"
     ansistrano_allow_anonymous_stats: no
     ansistrano_deploy_from: "{{ playbook_dir }}/../dist/apps/zubr-web/"
     ansistrano_keep_releases: 5
