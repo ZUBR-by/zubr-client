@@ -35,6 +35,8 @@ pipeline {
             API_URL       = credentials('API_URL')
         }
         steps {
+            unstash 'infra'
+            unstash 'output'
             writeFile file: 'dist/apps/zubr-web/assets/env/env.js', text: """
 (function(window) {
     window['env'] = window['env'] || {};
@@ -43,9 +45,6 @@ pipeline {
     window['env']['apiUrl'] = '$API_URL';
 })(this);c
 """
-            unstash 'infra'
-            unstash 'output'
-
             ansiblePlaybook(
                playbook: "infrastructure/ansistrano_${env.BRANCH}_deploy.yml",
                inventory: "$FRONTEND_HOST,",
