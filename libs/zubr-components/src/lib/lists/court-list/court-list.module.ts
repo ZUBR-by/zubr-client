@@ -7,12 +7,6 @@ import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
 import { ListOperationsPanelModule } from '../../general/list-operations-panel';
 import { CourtListComponent } from './court-list.component';
 
-/**
- * Commission list module
- * @description
- * @export
- * @class CommissionListModule
- */
 @NgModule({
   declarations: [CourtListComponent],
   exports: [

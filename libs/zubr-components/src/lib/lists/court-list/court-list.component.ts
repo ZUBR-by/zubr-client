@@ -1,66 +1,44 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import {Component} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Store} from '@ngrx/store';
 import {
-  selectTotalCountOfCommissions,
+  selectTotalCountOfCourts,
   AppState,
-  Commission,
-  CommissionEntityService
+  Court,
+  CourtEntityService
 } from '@zubr-client/zubr-store';
-import { DataGridOptions, EntityDataSource } from '@zubr-client/zubr-ui-elements';
+import {DataGridOptions, EntityDataSource} from '@zubr-client/zubr-ui-elements';
 
-/**
- * Commission list component
- * @description
- * @export
- * @class CommissionListComponent
- */
 @Component({
   selector: 'zubr-client-court-list',
   templateUrl: './court-list.component.html',
 })
 export class CourtListComponent {
 
-  /**
-   * Data grid configuration
-   * @description
-   * @type {DataGridOptions}
-   */
-  public dataGridOptions: DataGridOptions<Commission> = {
+  public dataGridOptions: DataGridOptions<Court> = {
     dataSource: new EntityDataSource(
-      this._commissionEntityService // custom server-side entity data source
+      this._courtEntityService // custom server-side entity data source
     ),
     columns: [
       {
-        label: 'code',
-        displayName: 'commission',
+        label: 'id',
+        displayName: 'court',
         titled: true,
         visibleOnMobile: false,
         fontSizeSmall: false,
       },
       {
-        label: 'name',
-        displayName: 'name',
-      },
-      {
-        label: 'description',
-        displayName: 'organization',
-        visibleOnMobile: true,
-        titled: true,
-      },
-      {
-        label: 'location',
+        label: 'address',
         displayName: 'address',
-        visibleOnMobile: true,
       },
     ],
     entityOptions: {
-      count: 10, // initial count of records per page
+      count: 20, // initial count of records per page
       page: 1, // initial page number
       searchBy: '', // search by specific key, but default it's null
       search: '',
     },
-    routerLinkPrefix: '/elections/commission/', // static part of record's link
+    routerLinkPrefix: '/courts/i/', // static part of record's link
     routerLinkKey: 'id', // dynamic part of record's link (e.g. id)
     enablePagination: true,
     enableSorting: true,
@@ -69,12 +47,13 @@ export class CourtListComponent {
     additionalFilterControl: new FormControl(''), // additional filter
     additionalFilterControl2: new FormControl(undefined), // additional filter
     additionalFilterKey: 'type', // filter key
-    emptyMessageTitle: 'no_commissions_found', // no records found message
-    totalPageCount: this._store$.select<number>(selectTotalCountOfCommissions),
+    emptyMessageTitle: 'no_courtss_found', // no records found message
+    totalPageCount: this._store$.select<number>(selectTotalCountOfCourts),
   };
 
   public constructor(
-    private _commissionEntityService: CommissionEntityService,
+    private _courtEntityService: CourtEntityService,
     private _store$: Store<AppState>
-  ) {}
+  ) {
+  }
 }

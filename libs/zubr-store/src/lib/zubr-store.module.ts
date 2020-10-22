@@ -26,6 +26,13 @@ import {
   CommissionEffects,
   CommissionService
 } from './entities/commission';
+
+import {
+  courtReducer,
+  CourtDataService,
+  CourtService
+} from './entities/court';
+
 import {
   heartbeatReducer,
   HeartbeatDataService,
@@ -98,6 +105,7 @@ import {
   campaignFeatureKey,
   candidateFeatureKey,
   commissionFeatureKey,
+  courtFeatureKey,
   entityConfig,
   heartbeatFeatureKey,
   memberFeatureKey,
@@ -118,6 +126,7 @@ export const reducers: ActionReducerMap<AppState> = {
   campaign: campaignReducer,
   candidate: candidateReducer,
   commission: commissionReducer,
+  court: courtReducer,
   heartbeat: heartbeatReducer,
   observer: observerReducer,
   observerRequest: observerRequestReducer,
@@ -130,12 +139,6 @@ export const reducers: ActionReducerMap<AppState> = {
   verify: verifyReducer,
 };
 
-/**
- * NgRx store module
- * @description
- * @export
- * @class ZubrStoreModule
- */
 @NgModule({
   imports: [
     CommonModule,
@@ -164,14 +167,6 @@ export const reducers: ActionReducerMap<AppState> = {
   ],
 })
 export class ZubrStoreModule {
-  /**
-   * Store module configuration
-   * @description
-   * @static
-   * @param {ZubrStore} config
-   * @returns {ModuleWithProviders<ZubrStoreModule>}
-   * @memberof ZubrStoreModule
-   */
   public static forRoot(config: ZubrStore): ModuleWithProviders<ZubrStoreModule> {
     return {
       ngModule: ZubrStoreModule,
@@ -192,6 +187,8 @@ export class ZubrStoreModule {
         CandidateDataService,
         CommissionService,
         CommissionDataService,
+        CourtDataService,
+        CourtService,
         HeartbeatService,
         HeartbeatDataService,
         ObserverService,
@@ -220,6 +217,7 @@ export class ZubrStoreModule {
     private _campaignDataService: CampaignDataService,
     private _candidateDataService: CandidateDataService,
     private _commissionDataService: CommissionDataService,
+    private _courtDataService: CourtDataService,
     private _memberDataService: MemberDataService,
     private _observerDataService: ObserverDataService,
     private _observerRequestDataService: ObserverRequestDataService,
@@ -233,6 +231,7 @@ export class ZubrStoreModule {
     _entityDataService.registerService(campaignFeatureKey, _campaignDataService);
     _entityDataService.registerService(candidateFeatureKey, _candidateDataService);
     _entityDataService.registerService(commissionFeatureKey, _commissionDataService);
+    _entityDataService.registerService(courtFeatureKey, _courtDataService);
     _entityDataService.registerService(memberFeatureKey, _memberDataService);
     _entityDataService.registerService(observerFeatureKey, _observerDataService);
     _entityDataService.registerService(observerRequestFeatureKey, _observerRequestDataService);

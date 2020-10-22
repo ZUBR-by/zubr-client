@@ -7,44 +7,14 @@
       <zubr-client-list-operations-panel
         [dataGridOptions]="dataGridOptions"
         [options]="{
-          primaryButton: {
-            enabled: true,
-            appearance: 'flat',
-            icon: 'gps_fixed',
-            label: 'map',
-            class: 'col-4',
-            routerLink: '/elections/map'
-          },
-          importButton: {
-            enabled: false,
-            entity: 'Commission'
-          },
           searchFilter: {
             enabled: false
           },
           searchFieldClass: 'col-8',
-          placeholder: 'commissions_search_placeholder'
+          placeholder: 'courts_search_placeholder'
       }">
       </zubr-client-list-operations-panel>
     </div>
-  </div>
-</div>
-<div class="row my-2">
-  <div class="col-md-12">
-    <mat-button-toggle-group
-      class="mx-3 mx-md-0"
-      name="fontStyle"
-      (change)="dataGridOptions.additionalFilterControl.setValue(this.$event.value)">
-      <mat-button-toggle value="" [checked]="true">
-        <span translate>all</span>
-      </mat-button-toggle>
-      <mat-button-toggle value="1">
-        <span translate>district_commissions</span>
-      </mat-button-toggle>
-      <mat-button-toggle value="2">
-        <span translate>station_commissions_short</span>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
   </div>
 </div>
 <div class="row my-2">
