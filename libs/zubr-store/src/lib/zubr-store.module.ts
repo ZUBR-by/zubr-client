@@ -34,6 +34,18 @@ import {
 } from './entities/court';
 
 import {
+  judgeReducer,
+  JudgeDataService,
+  JudgeService
+} from './entities/judge';
+
+import {
+  decisionReducer,
+  DecisionDataService,
+  DecisionService
+} from './entities/decision';
+
+import {
   heartbeatReducer,
   HeartbeatDataService,
   HeartbeatEffects,
@@ -109,6 +121,8 @@ import {
   entityConfig,
   heartbeatFeatureKey,
   memberFeatureKey,
+  judgeFeatureKey,
+  decisionFeatureKey,
   messageFeatureKey,
   metaReducers,
   observerFeatureKey,
@@ -127,6 +141,8 @@ export const reducers: ActionReducerMap<AppState> = {
   candidate: candidateReducer,
   commission: commissionReducer,
   court: courtReducer,
+  judge: judgeReducer,
+  decision: decisionReducer,
   heartbeat: heartbeatReducer,
   observer: observerReducer,
   observerRequest: observerRequestReducer,
@@ -187,8 +203,8 @@ export class ZubrStoreModule {
         CandidateDataService,
         CommissionService,
         CommissionDataService,
-        CourtDataService,
         CourtService,
+        CourtDataService,
         HeartbeatService,
         HeartbeatDataService,
         ObserverService,
@@ -201,6 +217,10 @@ export class ZubrStoreModule {
         PageEffects,
         MemberDataService,
         MemberService,
+        JudgeService,
+        JudgeDataService,
+        DecisionService,
+        DecisionDataService,
         PlaceService,
         PlaceDataService,
         MessageService,
@@ -219,6 +239,8 @@ export class ZubrStoreModule {
     private _commissionDataService: CommissionDataService,
     private _courtDataService: CourtDataService,
     private _memberDataService: MemberDataService,
+    private _judgeDataService: JudgeDataService,
+    private _decisionDataService: DecisionDataService,
     private _observerDataService: ObserverDataService,
     private _observerRequestDataService: ObserverRequestDataService,
     private _organizationDataService: OrganizationDataService,
@@ -233,6 +255,8 @@ export class ZubrStoreModule {
     _entityDataService.registerService(commissionFeatureKey, _commissionDataService);
     _entityDataService.registerService(courtFeatureKey, _courtDataService);
     _entityDataService.registerService(memberFeatureKey, _memberDataService);
+    _entityDataService.registerService(judgeFeatureKey, _judgeDataService);
+    _entityDataService.registerService(decisionFeatureKey, _decisionDataService);
     _entityDataService.registerService(observerFeatureKey, _observerDataService);
     _entityDataService.registerService(observerRequestFeatureKey, _observerRequestDataService);
     _entityDataService.registerService(organizationFeatureKey, _organizationDataService);

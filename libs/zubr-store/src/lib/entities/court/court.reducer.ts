@@ -13,8 +13,6 @@ export const courtAdapter: EntityAdapter<Court> =
 export const initialCourtState: CourtState =
   courtAdapter.getInitialState({
 
-    // additional entity state properties
-
     totalCount: null,
     entityError: null,
 

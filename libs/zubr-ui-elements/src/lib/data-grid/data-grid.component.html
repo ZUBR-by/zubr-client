@@ -16,8 +16,11 @@
     </th>
     <td cdk-cell *cdkCellDef="let element"
         class="d-none d-md-table-cell"
+        style="vertical-align: middle"
         [class.d-table-cell]="column.visibleOnMobile">
-      <a [ngSwitch]="column.displayType" [routerLink]="[dataGridOptions.routerLinkPrefix + element[dataGridOptions.routerLinkKey]]" class="data-grid-cell-link">
+      <a [ngSwitch]="column.displayType"
+         [routerLink]="[dataGridOptions.routerLinkPrefix + element[dataGridOptions.routerLinkKey]]"
+         class="data-grid-cell-link">
         <span *ngSwitchCase="'image'">
           <div class="data-grid-image">
             <img src="{{element[column.label] ? element[column.label] : './assets/images/user.svg'}}"
@@ -43,7 +46,7 @@
                 [class.embed-member-name]="column.titled"
                 [class.font-size-9px]="column.fontSizeSmall"
                 [ngClass]="{ 'badge badge-secondary' : column.badged }">
-            {{ element[column.label] | date : 'dd/MM/yyyy HH:mm' }}
+            {{ element[column.label] | date : 'dd.MM.yyyy HH:mm' }}
           </span>
         </span>
         <span *ngSwitchDefault>
@@ -57,7 +60,7 @@
             }}
           </span>
         </span>
-        </a>
+      </a>
     </td>
   </ng-container>
   <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>

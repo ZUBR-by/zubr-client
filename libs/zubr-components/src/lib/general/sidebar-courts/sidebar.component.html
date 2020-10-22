@@ -41,25 +41,23 @@
         </div>
       </a>
     </li>
-
-
-<!--    <li>-->
-<!--      <a class="align-self-center"-->
-<!--         [routerLink]="['/elections/organizations']"-->
-<!--         [routerLinkActive]="'active'">-->
-<!--        <div class="sidebar-item-icon float-left">-->
-<!--          <i class="material-icons">-->
-<!--            flag-->
-<!--          </i>-->
-<!--        </div>-->
-<!--        <div class="sidebar-item-text float-left h-100 align-middle">-->
-<!--          <div class="container d-flex h-100">-->
-<!--            <div class="row justify-content-center align-self-center"-->
-<!--                 translate>organizations</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--    </li>-->
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/courts/judge']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            people
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>judges</div>
+          </div>
+        </div>
+      </a>
+    </li>
 
   </ul>
   <div class="sidebar-separator m-3"></div>
@@ -85,7 +83,26 @@
     </li>
 
   </ul>
-
+  <div class="sidebar-separator m-3"></div>
+  <ul class="list-unstyled components mb-3">
+    <li>
+      <a class="align-self-center"
+         [routerLink]="['/elections/results']"
+         [routerLinkActive]="'active'">
+        <div class="sidebar-item-icon float-left">
+          <i class="material-icons">
+            people
+          </i>
+        </div>
+        <div class="sidebar-item-text float-left h-100 align-middle">
+          <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center"
+                 translate>Выборы 2020</div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
   <div class="sidebar-separator m-3"></div>
 
   <div class="mx-3 mb-3 text-center">

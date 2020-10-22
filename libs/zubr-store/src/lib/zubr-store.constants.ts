@@ -13,6 +13,8 @@ import { CampaignState } from './entities/campaign';
 import { CandidateState } from './entities/candidate';
 import { CommissionState } from './entities/commission';
 import { CourtState } from './entities/court';
+import { JudgeState } from './entities/judge';
+import { DecisionState } from './entities/decision';
 import { HeartbeatState } from './entities/heartbeat';
 import { MemberState } from './entities/member';
 import { OrganizationState } from './entities/organization';
@@ -24,7 +26,9 @@ export const bookmarkFeatureKey: string = 'bookmark';
 export const campaignFeatureKey: string = 'campaign';
 export const candidateFeatureKey: string = 'candidate';
 export const commissionFeatureKey: string = 'commission';
-export const courtFeatureKey: string = 'commission';
+export const courtFeatureKey: string = 'court';
+export const judgeFeatureKey: string = 'judge';
+export const decisionFeatureKey: string = 'decision';
 export const heartbeatFeatureKey: string = 'heartbeat';
 export const memberFeatureKey: string = 'member';
 export const organizationFeatureKey: string = 'organization';
@@ -49,6 +53,10 @@ export interface AppState {
   commission: CommissionState;
 
   court: CourtState;
+
+  judge: JudgeState;
+
+  decision: DecisionState;
 
   heartbeat: HeartbeatState;
 
@@ -77,6 +85,9 @@ export const entityMetadata: EntityMetadataMap = {
   commission: {},
   heartbeat: {},
   member: {},
+  judge: {},
+  decision: {},
+  court: {},
   organization: {},
   observer: {},
   observerRequest: {},
@@ -92,15 +103,6 @@ export const entityConfig: EntityDataModuleConfig = {
   entityMetadata,
 };
 
-/**
- * Local storage sync
- * @description
- * @export
- * @template T
- * @template V
- * @param {ActionReducer<T, V>} reducer
- * @returns {ActionReducer<T, V>}
- */
 export function localStorageSyncReducer<T, V extends Action>(
   reducer: ActionReducer<T, V>
 ): ActionReducer<T, V> {

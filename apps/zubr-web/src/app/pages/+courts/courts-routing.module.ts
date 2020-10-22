@@ -26,7 +26,43 @@ export const routes: Routes = [
         },
         canActivate: [PageGuardService],
       },
-
+      {
+        path: 'i/:id',
+        loadChildren: () => import(
+          './courts-detail-page/court-detail-page.module'
+          ).then(m => m.CourtDetailPageModule),
+        data: {
+          title: 'court',
+          favicon: 'account_balance',
+          navigateToPageTab: true,
+          dynamicPageTabView: true,
+        },
+        canActivate: [PageGuardService],
+      },
+      {
+        path: 'judge',
+        loadChildren: () => import(
+          './judge-list-page/judge-list-page.module'
+          ).then(m => m.JudgeListPageModule),
+        data: {
+          title: 'judges',
+          favicon: 'account_balance',
+          navigateToPageTab: true,
+        },
+        canActivate: [PageGuardService],
+      },
+      {
+        path: 'judge/:id',
+        loadChildren: () => import(
+          './judge-detail-page/judge-detail-page.module'
+          ).then(m => m.JudgeDetailPageModule),
+        data: {
+          title: 'judges',
+          favicon: 'account_balance',
+          navigateToPageTab: true,
+        },
+        canActivate: [PageGuardService],
+      },
       {
         path: 'start',
         loadChildren: () => import(

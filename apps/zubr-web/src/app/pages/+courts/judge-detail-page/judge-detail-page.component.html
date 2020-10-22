@@ -1,36 +1,48 @@
 <div class="zubr-loading-container"
-     [hidden]="(courtLoading$ | async) === false">
+     [hidden]="(judgeLoading$ | async) === false">
   <mat-spinner [diameter]="30"></mat-spinner>
 </div>
 
 <div class="row my-3" *ngIf="viewError">
   <div class="col-md-12">
-    <zubr-client-page-not-found [message]="'court_not_found'"></zubr-client-page-not-found>
+    <zubr-client-page-not-found [message]="'judge_not_found'"></zubr-client-page-not-found>
   </div>
 </div>
 
-<div class="col-md-12" *ngIf="(entity$ | async) as court">
+<div class="col-md-12" *ngIf="(entity$ | async) as judge">
 
   <div class="row my-3">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
-          <h2>{{ court.name }}</h2>
+          <h2>{{ judge.lastName }} {{ judge.firstName }} {{ judge.middleName }}</h2>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="member-detail-photo mx-auto text-center">
+          <img alt="Member photo"
+               src="{{
+                   judge.photoUrl ? judge.photoUrl
+                   : './assets/images/user.svg'
+                   }}"/>
+        </div>
+        <div class="embed-member-origin text-center" *ngIf="judge.photoUrl">
+          <a href="{{judge.photoOrigin}}" target="_blank" translate>photo_origin</a>
         </div>
       </div>
       <div class="row my-3 px-2">
         <share-buttons [include]="['facebook','vk','telegram','print','copy']"
                        [show]="5"
                        [size]="-4"
-                       [title]="court.name + ' «' + court.description + '»'"
-                       [description]="court.name + ' «' + court.description + '»'"
+                       [title]="judge.lastName + ' ' + judge.firstName + judge.middleName"
+                       [description]="judge.lastName + ' ' + judge.firstName + judge.middleName"
                        [image]="'https://zubr.in/assets/images/zubr_og_image.png?v=2'"
                        [tags]="'#выборы #беларусь #2020'"
                        [autoSetMeta]="false"
         ></share-buttons>
         <zubr-client-button
           class="mr-2 mb-2"
-          [routerLink]="['/courts/i/' + court.id]"
+          [routerLink]="['/elections/judge/' + judge.id]"
           fragment="comments"
           [options]="{
                       icon: 'chat',
@@ -45,29 +57,11 @@
             <div class="col-md-12">
               <h3 translate>general_information</h3>
               <div class="alert background-gray">
-                <div #courtMap id="courtMap" class="page-right-map"></div>
+<!--                <div #judgeMap id="judgeMap" class="page-right-map"></div>-->
                 <br>
-                <p><b translate>code</b>: <b class="color-secondary">{{ court.id }}</b></p>
-                <p><b translate>legal_entity</b>: <span class="text-color-ui-control font-weight-bold">{{ court.description }}</span></p>
-                <p><b translate>address</b>: {{ court.address }}</p>
+                <p><b translate>code</b>: <b class="color-secondary">{{ judge.id }}</b></p>
+                <p><b translate>legal_entity</b>: <span class="text-color-ui-control font-weight-bold">{{ judge.comment }}</span></p>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="zubr-loading-container"
-               [hidden]="(judgesLoading$ | async) === false">
-            <mat-spinner [diameter]="30"></mat-spinner>
-          </div>
-          <div class="row my-2" *ngIf="(judges$ | async) as judges">
-            <div class="col-md-12">
-              <h3>
-                <span translate>judges_of_courts</span>
-                <span> ({{ judges.length }})</span>
-              </h3>
-              <div *ngIf="judges.length == 0"
-                   class="alert alert-primary" translate>no_data</div>
-              <zubr-client-embed-judge-list [judges]="judges" [expandable]="true"></zubr-client-embed-judge-list>
             </div>
           </div>
         </div>
@@ -76,16 +70,17 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h3 translate>decisions</h3>
+      <h3 translate>incidents</h3>
       <zubr-client-data-grid
         [dataGridOptions]="dataGridOptions">
       </zubr-client-data-grid>
     </div>
   </div>
 
+
   <div class="row my-2" id="comments">
     <div class="col-md-12">
-      <h3 translate>discussion_of_court_activity</h3>
+      <h3 translate>discussion_of_judge_activity</h3>
       <div id="disqus_thread"></div>
     </div>
   </div>

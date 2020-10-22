@@ -26,13 +26,8 @@ export interface DataGridOptions<T> {
    * @memberof DataGridOptions
    */
   entityOptions: DataGridEntityOptions | any;
-  /**
-   * Router link prefix
-   * @description
-   * @type {string}
-   * @memberof DataGridOptions
-   */
-  routerLinkPrefix: string;
+
+  routerLinkPrefix: string | null;
   /**
    * Router link key
    * @description

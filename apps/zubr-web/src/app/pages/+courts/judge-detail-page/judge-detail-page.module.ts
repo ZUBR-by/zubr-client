@@ -17,18 +17,18 @@ import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-import { CourtDetailPageComponent } from './court-detail-page.component';
+import { JudgeDetailPageComponent } from './judge-detail-page.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: CourtDetailPageComponent,
+    component: JudgeDetailPageComponent,
   },
 ];
 
 @NgModule({
   declarations: [
-    CourtDetailPageComponent,
+    JudgeDetailPageComponent,
   ],
   imports: [
     CommonModule,
@@ -49,4 +49,4 @@ export const routes: Routes = [
     AngularFileUploaderModule,
   ],
 })
-export class CourtDetailPageModule { }
+export class JudgeDetailPageModule { }

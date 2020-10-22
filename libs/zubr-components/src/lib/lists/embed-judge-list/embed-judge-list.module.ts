@@ -1,0 +1,32 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
+import { ListOperationsPanelModule } from '../../general/list-operations-panel';
+import { EmbedJudgeListComponent } from './embed-judge-list.component';
+
+/**
+ * Member list module
+ * @description
+ * @export
+ * @class EmbedMemberListModule
+ */
+@NgModule({
+  declarations: [EmbedJudgeListComponent],
+  exports: [
+    EmbedJudgeListComponent,
+  ],
+  imports: [
+    CommonModule,
+    ZubrUiElementsModule,
+    RouterModule,
+    TranslateModule,
+    ListOperationsPanelModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+  ],
+})
+export class EmbedJudgeListModule { }

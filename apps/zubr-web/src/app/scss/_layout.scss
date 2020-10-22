@@ -63,6 +63,13 @@ zubr-client-list-operations-panel {
   color: $zubr-font-secondary-color;
 }
 
+.embed-judge-name {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 16px;
+  color: $zubr-font-secondary-color;
+}
+
 .embed-member-origin {
   font-size: 9px;
 }
@@ -109,6 +116,50 @@ zubr-client-list-operations-panel {
   }
 }
 
+.embed-judges-list {
+  .embed-judge-item-group {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .embed-judge-item {
+    cursor: pointer;
+    &:hover {
+      background-color: $zubr-element-white-hover-color;
+    }
+    &.manager {
+      background-color: #fff3cd;
+    }
+    .embed-judge-position-wrapper {
+      color: #999999;
+      font-size: 12px;
+      line-height: 12px;
+      .embed-judge-position {
+        &.manager {
+          color: #e8000c;
+          font-weight: bold;
+        }
+        &.sub-manager {
+          color: #e837c0;
+        }
+        &.secretary {
+          color: #2cb355;
+        }
+      }
+    }
+    .embed-judge-photo {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+
 .text-color-ui-control {
   color: $zubr-ui-control-color;
 }
@@ -151,6 +202,17 @@ zubr-client-list-operations-panel {
         width: 150px;
       }
       .embed-member-photo {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+  .embed-judges-list {
+    .embed-judge-item {
+      .embed-judge-info {
+        width: 150px;
+      }
+      .embed-judge-photo {
         width: 70px;
         height: 70px;
       }

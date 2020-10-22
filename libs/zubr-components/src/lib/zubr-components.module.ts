@@ -13,8 +13,10 @@ import { SidebarCourtsModule } from './general/sidebar-courts';
 import { ToolbarMobileModule } from './general/toolbar-mobile';
 import { CommissionListModule } from './lists/commission-list/commission-list.module';
 import { CourtListModule } from './lists/court-list/court-list.module';
+import { JudgeListModule } from './lists/judge-list/judge-list.module';
 import { EmbedBookmarkListModule } from './lists/embed-bookmark-list';
 import { EmbedMemberListModule } from './lists/embed-member-list';
+import { EmbedJudgeListModule } from './lists/embed-judge-list';
 import { MemberListModule } from './lists/member-list/member-list.module';
 import { MessageListModule } from './lists/message-list/message-list.module';
 import { OrganizationListModule } from './lists/organization-list/organization-list.module';
@@ -36,8 +38,10 @@ import { OrganizationListModule } from './lists/organization-list/organization-l
     CommissionListModule,
     MemberListModule,
     CourtListModule,
+    JudgeListModule,
     CommissionMapModule,
     EmbedMemberListModule,
+    EmbedJudgeListModule,
     PageNotFoundModule,
     ConfirmationDialogModule,
     EmbedBookmarkListModule,

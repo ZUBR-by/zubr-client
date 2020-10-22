@@ -3,6 +3,8 @@ export * from './candidate';
 export * from './commission';
 export * from './organization';
 export * from './member';
+export * from './judge';
+export * from './decision';
 export * from './place';
 export * from './observer';
 export * from './message';

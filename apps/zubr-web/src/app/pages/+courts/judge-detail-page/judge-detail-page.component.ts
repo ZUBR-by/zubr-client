@@ -1,16 +1,15 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
-
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import {
   AppState,
-  Court, CourtEntityService,
-  Judge, JudgeEntityService,
-  Decision, DecisionEntityService, selectTotalCountOfDecisions,
-  PageService
+  Judge,
+  JudgeEntityService,
+  Decision,
+  DecisionEntityService,
+  PageService, selectTotalCountOfDecisions
 } from '@zubr-client/zubr-store';
 import { DataGridOptions, EntityDataSource } from '@zubr-client/zubr-ui-elements';
 import Feature from 'ol/Feature';
@@ -24,16 +23,17 @@ import VectorSource from 'ol/source/Vector';
 import { Icon, Style } from 'ol/style';
 import View from 'ol/View';
 import { of, Observable, Subject} from 'rxjs';
-import { delay, mergeMap, takeUntil, tap } from 'rxjs/operators';
+import { delay, filter, mergeMap, startWith, takeUntil, tap } from 'rxjs/operators';
+import {FormControl} from "@angular/forms";
 
-export const courtMapSelector: string = 'courtMap';
+export const judgeMapSelector: string = 'judgeMap';
 
 @Component({
-  selector: 'zubr-client-court-page',
-  templateUrl: './court-detail-page.component.html',
+  selector: 'zubr-client-judge-page',
+  templateUrl: './judge-detail-page.component.html',
 })
-export class CourtDetailPageComponent implements OnInit, OnDestroy {
-  @ViewChild(courtMapSelector, { static: false })
+export class JudgeDetailPageComponent implements OnInit, OnDestroy {
+  @ViewChild(judgeMapSelector, { static: false })
   public set mapElement(content: ElementRef) {
     if (content) { // initially setter gets called with undefined
       this.mapElementRef = content;
@@ -42,11 +42,14 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
 
   public viewError: boolean = false;
 
-  public entity$: Observable<Court>;
+  public entity$: Observable<Judge>;
 
   public judges$: Observable<Judge[]>;
-
-  public courtLoading$: Observable<boolean>;
+  /**
+   * Component readiness status
+   * @description
+   */
+  public judgeLoading$: Observable<boolean>;
 
   public judgesLoading$: Observable<boolean>;
 
@@ -59,7 +62,7 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
   public _stop$: Subject<void> = new Subject();
 
   public dataGridOptions: DataGridOptions<Decision> = {
-    dataSource: new EntityDataSource(this._messageEntityService),
+    dataSource: new EntityDataSource(this._decisionEntityService),
     columns: [
       {
         label: 'fullName',
@@ -93,12 +96,12 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
     routerLinkKey: 'id',
     enablePagination: true,
     enableSorting: true,
-    searchControl: new FormControl(''),
-    searchKeyControl: new FormControl(''),
-    additionalFilterControl: new FormControl(undefined),
-    additionalFilterControl2: new FormControl(undefined),
-    additionalFilterKey: 'court.id',
-    emptyMessageTitle: 'no_messages_found',
+    searchControl: new FormControl(''), // use this control in view file
+    searchKeyControl: new FormControl(''), // search in column name
+    additionalFilterControl: new FormControl(undefined), // additional filter
+    additionalFilterControl2: new FormControl(undefined), // additional filter
+    additionalFilterKey: 'judge.id',
+    emptyMessageTitle: 'no_messages_found', // no records found message
     totalPageCount: this._store$.select<number>(selectTotalCountOfDecisions),
   };
 
@@ -107,9 +110,8 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
   public constructor(
     private _activatedRoute: ActivatedRoute,
     private _pageService: PageService,
-    private _courtEntityService: CourtEntityService,
     private _judgeEntityService: JudgeEntityService,
-    private _messageEntityService: DecisionEntityService,
+    private _decisionEntityService: DecisionEntityService,
     private _translateService: TranslateService,
     private _store$: Store<AppState>,
     private _router: Router,
@@ -118,32 +120,26 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
 
-    this._courtEntityService.clearCache();
+    this._judgeEntityService.clearCache();
     this._judgeEntityService.clearCache();
 
     // Initialize page tab instance base on a single data entity
 
     this.entity$ = this._pageService
-      .entityPageTabInstance<Court>(
+      .entityPageTabInstance<Judge>(
         this._activatedRoute,
-        this._courtEntityService,
+        this._judgeEntityService,
         ['description']
       )
       .pipe(
-        tap((entity: Court) => {
+        tap((entity: Judge) => {
 
-          if (entity) {
-            this.viewError = false;
-            this.latitude = entity.latitude;
-            this.longitude = entity.longitude;
-          } else {
-            this.viewError = true;
-          }
+          this.viewError = !entity;
 
           return entity;
 
         }),
-        mergeMap((entity: Court, index: number) => {
+        mergeMap((entity: Judge, index: number) => {
           if (entity) {
             this.dataGridOptions.additionalFilterControl.setValue(entity.id);
             this.judges$ = this._judgeEntityService.getWithQuery({
@@ -159,7 +155,7 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
         takeUntil(this._stop$)
       );
 
-    this.courtLoading$ = this._courtEntityService.loading$.pipe(
+    this.judgeLoading$ = this._judgeEntityService.loading$.pipe(
       delay(0),
       tap(
         () => {
@@ -171,7 +167,7 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
             }
 
             this.map = new Map({
-              target: courtMapSelector,
+              target: judgeMapSelector,
               layers: [
                 new TileLayer({
                   source: new OSM(),

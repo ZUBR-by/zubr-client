@@ -2,36 +2,37 @@ import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {
-  selectTotalCountOfCourts,
+  selectTotalCountOfJudges,
   AppState,
-  Court,
-  CourtEntityService
+  Judge,
+  JudgeEntityService
 } from '@zubr-client/zubr-store';
 import {DataGridOptions, EntityDataSource} from '@zubr-client/zubr-ui-elements';
 
 @Component({
-  selector: 'zubr-client-court-list',
-  templateUrl: './court-list.component.html',
+  selector: 'zubr-client-judge-list',
+  templateUrl: './judge-list.component.html',
 })
-export class CourtListComponent {
+export class JudgeListComponent {
 
-  public dataGridOptions: DataGridOptions<Court> = {
-    dataSource: new EntityDataSource(this._courtEntityService),
+  public dataGridOptions: DataGridOptions<Judge> = {
+    dataSource: new EntityDataSource(this._judgeEntityService),
     columns: [
       {
-        label: 'id',
-        displayName: 'court',
+        label: 'photoUrl',
+        displayName: '',
+        visibleOnMobile: true,
+        displayType: 'image',
+      },
+      {
         titled: true,
+        label: 'fullName',
+        displayName: 'name'
       },
       {
-        label: 'name',
-        displayName: 'name',
-      },
-      {
-        label: 'address',
-        displayName: 'address',
-        visibleOnMobile: false,
-      },
+        label: 'description',
+        displayName: 'name'
+      }
     ],
     entityOptions: {
       count: 20,
@@ -39,7 +40,7 @@ export class CourtListComponent {
       searchBy: '',
       search: '',
     },
-    routerLinkPrefix: '/courts/i/', // static part of record's link
+    routerLinkPrefix: '/courts/judge/', // static part of record's link
     routerLinkKey: 'id', // dynamic part of record's link (e.g. id)
     enablePagination: true,
     enableSorting: true,
@@ -48,12 +49,12 @@ export class CourtListComponent {
     additionalFilterControl: new FormControl(''), // additional filter
     additionalFilterControl2: new FormControl(undefined), // additional filter
     additionalFilterKey: 'type', // filter key
-    emptyMessageTitle: 'no_courts_found', // no records found message
-    totalPageCount: this._store$.select<number>(selectTotalCountOfCourts),
+    emptyMessageTitle: 'no_judges_found', // no records found message
+    totalPageCount: this._store$.select<number>(selectTotalCountOfJudges),
   };
 
   public constructor(
-    private _courtEntityService: CourtEntityService,
+    private _judgeEntityService: JudgeEntityService,
     private _store$: Store<AppState>
   ) {
   }
