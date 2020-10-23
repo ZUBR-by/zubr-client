@@ -133,7 +133,7 @@ export class CommissionDetailPageComponent implements OnInit, OnDestroy {
         label: 'createdAt',
         displayName: 'date',
         visibleOnMobile: true,
-        displayType: 'date',
+        displayType: 'datetime',
       },
       {
         label: 'initiative',

@@ -32,6 +32,10 @@ export class JudgeListComponent {
       {
         label: 'description',
         displayName: 'name'
+      },
+      {
+        label: 'comment',
+        displayName: 'name'
       }
     ],
     entityOptions: {

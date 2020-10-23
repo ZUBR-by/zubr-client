@@ -62,11 +62,6 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
     dataSource: new EntityDataSource(this._messageEntityService),
     columns: [
       {
-        label: 'fullName',
-        displayName: 'fullName',
-        visibleOnMobile: true
-      },
-      {
         label: 'article',
         displayName: 'article',
         visibleOnMobile: true

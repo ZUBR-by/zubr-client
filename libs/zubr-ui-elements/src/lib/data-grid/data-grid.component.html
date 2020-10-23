@@ -34,11 +34,19 @@
                 [class.font-size-9px]="column.fontSizeSmall"
                 [ngClass]="{ 'badge badge-secondary' : column.badged }">
             <span *ngFor="let item of element[column.label]; let j = index">
-              {{ column.labelPrefix ?
-              (column.labelPrefix + '_' + item | translate) :
-                item
+              {{ column.labelPrefix
+                ? (column.labelPrefix + '_' + item | translate)
+                : item
               }}<span *ngIf="j+1 < element[column.label].length">, </span>
             </span>
+          </span>
+        </span>
+        <span *ngSwitchCase="'datetime'">
+          <span class="d-block"
+                [class.embed-member-name]="column.titled"
+                [class.font-size-9px]="column.fontSizeSmall"
+                [ngClass]="{ 'badge badge-secondary' : column.badged }">
+            {{ element[column.label] | date : 'dd.MM.yyyy HH:mm' }}
           </span>
         </span>
         <span *ngSwitchCase="'date'">
@@ -46,7 +54,7 @@
                 [class.embed-member-name]="column.titled"
                 [class.font-size-9px]="column.fontSizeSmall"
                 [ngClass]="{ 'badge badge-secondary' : column.badged }">
-            {{ element[column.label] | date : 'dd.MM.yyyy HH:mm' }}
+            {{ element[column.label] | date : 'dd.MM.yyyy' }}
           </span>
         </span>
         <span *ngSwitchDefault>

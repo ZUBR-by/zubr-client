@@ -10,28 +10,25 @@
 </div>
 
 <div class="col-md-12" *ngIf="(entity$ | async) as judge">
-
-  <div class="row my-3">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>{{ judge.lastName }} {{ judge.firstName }} {{ judge.middleName }}</h2>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="member-detail-photo mx-auto text-center">
-          <img alt="Member photo"
-               src="{{
+  <div class="row">
+    <div class="col-md-6">
+      <h2 style="padding-top: 15px;">{{ judge.lastName }} {{ judge.firstName }} {{ judge.middleName }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="member-detail-photo mx-auto text-center">
+        <img alt="Member photo"
+             src="{{
                    judge.photoUrl ? judge.photoUrl
                    : './assets/images/user.svg'
                    }}"/>
-        </div>
-        <div class="embed-member-origin text-center" *ngIf="judge.photoUrl">
-          <a href="{{judge.photoOrigin}}" target="_blank" translate>photo_origin</a>
-        </div>
       </div>
-      <div class="row my-3 px-2">
+    </div>
+    <div class="col-md-10">
+      <div class="row">
         <share-buttons [include]="['facebook','vk','telegram','print','copy']"
+                       style="padding-left: 15px"
                        [show]="5"
                        [size]="-4"
                        [title]="judge.lastName + ' ' + judge.firstName + judge.middleName"
@@ -40,9 +37,11 @@
                        [tags]="'#выборы #беларусь #2020'"
                        [autoSetMeta]="false"
         ></share-buttons>
+      </div>
+      <div class="row">
         <zubr-client-button
-          class="mr-2 mb-2"
-          [routerLink]="['/elections/judge/' + judge.id]"
+          class="mr-2"
+          [routerLink]="['/courts/judge/' + judge.id]"
           fragment="comments"
           [options]="{
                       icon: 'chat',
@@ -51,25 +50,26 @@
                     }"
         ></zubr-client-button>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="row my-2">
-            <div class="col-md-12">
-              <h3 translate>general_information</h3>
-              <div class="alert background-gray">
-<!--                <div #judgeMap id="judgeMap" class="page-right-map"></div>-->
-                <br>
-                <p><b translate>code</b>: <b class="color-secondary">{{ judge.id }}</b></p>
-                <p><b translate>legal_entity</b>: <span class="text-color-ui-control font-weight-bold">{{ judge.comment }}</span></p>
-              </div>
-            </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row my-2">
+        <div class="col-md-12">
+          <div class="alert background-gray">
+            <p><b translate>position</b>: <b class="color-secondary">{{ judge.description}}</b></p>
+            <p><b translate>court</b>:
+              <span class="text-color-ui-control font-weight-bold">
+                {{ judge.comment }}
+              </span>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" style="overflow-x: auto">
       <h3 translate>incidents</h3>
       <zubr-client-data-grid
         [dataGridOptions]="dataGridOptions">

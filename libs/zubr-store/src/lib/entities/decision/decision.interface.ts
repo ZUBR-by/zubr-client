@@ -13,5 +13,7 @@ export interface Decision {
 
   aftermathAmount: number
 
+  aftermath: string
+
   article: string
 }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -12,43 +12,23 @@ import {
   PageService, selectTotalCountOfDecisions
 } from '@zubr-client/zubr-store';
 import { DataGridOptions, EntityDataSource } from '@zubr-client/zubr-ui-elements';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import TileLayer from 'ol/layer/Tile';
-import VectorLayer from 'ol/layer/Vector';
 import Map from 'ol/Map';
-import { fromLonLat } from 'ol/proj';
-import { OSM } from 'ol/source';
-import VectorSource from 'ol/source/Vector';
-import { Icon, Style } from 'ol/style';
-import View from 'ol/View';
 import { of, Observable, Subject} from 'rxjs';
-import { delay, filter, mergeMap, startWith, takeUntil, tap } from 'rxjs/operators';
+import { delay, mergeMap, takeUntil, tap } from 'rxjs/operators';
 import {FormControl} from "@angular/forms";
-
-export const judgeMapSelector: string = 'judgeMap';
 
 @Component({
   selector: 'zubr-client-judge-page',
   templateUrl: './judge-detail-page.component.html',
 })
 export class JudgeDetailPageComponent implements OnInit, OnDestroy {
-  @ViewChild(judgeMapSelector, { static: false })
-  public set mapElement(content: ElementRef) {
-    if (content) { // initially setter gets called with undefined
-      this.mapElementRef = content;
-    }
-  }
 
   public viewError: boolean = false;
 
   public entity$: Observable<Judge>;
 
   public judges$: Observable<Judge[]>;
-  /**
-   * Component readiness status
-   * @description
-   */
+
   public judgeLoading$: Observable<boolean>;
 
   public judgesLoading$: Observable<boolean>;
@@ -65,18 +45,14 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     dataSource: new EntityDataSource(this._decisionEntityService),
     columns: [
       {
-        label: 'fullName',
-        displayName: 'fullName',
-        visibleOnMobile: true
-      },
-      {
         label: 'article',
         displayName: 'article',
-        visibleOnMobile: true
+        visibleOnMobile: true,
+        labelPrefix: 'article'
       },
       {
-        label: 'aftermathType',
-        displayName: 'aftermathType',
+        label: 'aftermath',
+        displayName: 'aftermath',
         visibleOnMobile: true
       },
       {
@@ -123,8 +99,6 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     this._judgeEntityService.clearCache();
     this._judgeEntityService.clearCache();
 
-    // Initialize page tab instance base on a single data entity
-
     this.entity$ = this._pageService
       .entityPageTabInstance<Judge>(
         this._activatedRoute,
@@ -159,54 +133,7 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
       delay(0),
       tap(
         () => {
-
           setTimeout(() => {
-
-            if (this.mapElementRef) {
-              this.mapElementRef.nativeElement.innerHTML = '';
-            }
-
-            this.map = new Map({
-              target: judgeMapSelector,
-              layers: [
-                new TileLayer({
-                  source: new OSM(),
-                }),
-              ],
-              view: new View({
-                center: fromLonLat([this.longitude, this.latitude]),
-                zoom: 15,
-                enableRotation: false,
-              }),
-              interactions: [],
-              controls: [],
-
-            });
-
-            const updatedView: View = this.map.getView();
-            const marker: VectorLayer = new VectorLayer({
-              source: new VectorSource({
-                features: [
-                  new Feature({
-                    geometry: new Point(fromLonLat([
-                      this.longitude, this.latitude,
-                    ])),
-                  }),
-                ],
-              }),
-              style: new Style({
-                image: new Icon({
-                  scale: 0.7,
-                  src: './assets/images/station_icon.svg',
-                }),
-              }),
-            });
-
-            this.map.addLayer(marker);
-            this.map.setView(
-              updatedView
-            );
-
             // const d: Document = document;
             // const s: any = d.createElement('script');
             // s.src = 'https://https-zubr-in.disqus.com/embed.js';
