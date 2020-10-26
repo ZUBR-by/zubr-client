@@ -136,16 +136,9 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             const d: Document = document;
             const s: any = d.createElement('script');
-
-            s.text = `
-DiscourseEmbed = { discourseUrl: 'https://zubr.trydiscourse.com/',discourseEmbedUrl: 'zubr.ws/courts/judge/1' };
-(function() {
-  var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
-  d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
-})();`;
+            s.src = 'https://zubr-court.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', new Date().toString());
             (d.head || d.body).appendChild(s);
-
             },       500
           );
         }
