@@ -138,7 +138,7 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
             const s: any = d.createElement('script');
 
             s.text = `
-DiscourseEmbed = { discourseUrl: 'https://zubr.trydiscourse.com/',discourseEmbedUrl: 'https://zubr.ws/courts/judge/1' };
+DiscourseEmbed = { discourseUrl: 'https://zubr.trydiscourse.com/',discourseEmbedUrl: 'zubr.ws/courts/judge/1' };
 (function() {
   var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
   d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
