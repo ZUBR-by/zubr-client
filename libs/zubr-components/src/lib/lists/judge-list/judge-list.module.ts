@@ -6,19 +6,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
 import { ListOperationsPanelModule } from '../../general/list-operations-panel';
 import { JudgeListComponent } from './judge-list.component';
+import {CommissionMapModule} from "../../general/commission-map";
 
 @NgModule({
   declarations: [JudgeListComponent],
   exports: [
     JudgeListComponent,
   ],
-  imports: [
-    CommonModule,
-    ZubrUiElementsModule,
-    RouterModule,
-    TranslateModule,
-    ListOperationsPanelModule,
-    MatButtonToggleModule,
-  ],
+    imports: [
+        CommonModule,
+        ZubrUiElementsModule,
+        RouterModule,
+        TranslateModule,
+        ListOperationsPanelModule,
+        MatButtonToggleModule,
+        CommissionMapModule,
+    ],
 })
 export class JudgeListModule { }

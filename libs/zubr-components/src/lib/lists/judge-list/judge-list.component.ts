@@ -44,7 +44,7 @@ export class JudgeListComponent {
       searchBy: '',
       search: '',
     },
-    routerLinkPrefix: '/courts/judge/', // static part of record's link
+    routerLinkPrefix: '/c/judge/', // static part of record's link
     routerLinkKey: 'id', // dynamic part of record's link (e.g. id)
     enablePagination: true,
     enableSorting: true,

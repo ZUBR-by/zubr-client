@@ -15,7 +15,7 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'list',
+        path: 'court',
         loadChildren: () => import(
           './court-list-page/court-list-page.module'
           ).then(m => m.CourtListPageModule),
@@ -27,7 +27,7 @@ export const routes: Routes = [
         canActivate: [PageGuardService],
       },
       {
-        path: 'i/:id',
+        path: 'court/:id',
         loadChildren: () => import(
           './courts-detail-page/court-detail-page.module'
           ).then(m => m.CourtDetailPageModule),

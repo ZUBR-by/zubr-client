@@ -39,7 +39,7 @@ export class CourtListComponent {
       searchBy: '',
       search: '',
     },
-    routerLinkPrefix: '/courts/i/', // static part of record's link
+    routerLinkPrefix: '/c/court/', // static part of record's link
     routerLinkKey: 'id', // dynamic part of record's link (e.g. id)
     enablePagination: true,
     enableSorting: true,
