@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,7 +8,8 @@ import {
   JudgeEntityService,
   Decision,
   DecisionEntityService,
-  PageService, selectTotalCountOfDecisions
+  PageService,
+  selectTotalCountOfDecisions
 } from '@zubr-client/zubr-store';
 import { DataGridOptions, EntityDataSource } from '@zubr-client/zubr-ui-elements';
 import Map from 'ol/Map';
@@ -90,20 +90,18 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     private _decisionEntityService: DecisionEntityService,
     private _translateService: TranslateService,
     private _store$: Store<AppState>,
-    private _router: Router,
-    private _dialog: MatDialog
+    private _router: Router
   ) {}
 
   public ngOnInit(): void {
 
-    this._judgeEntityService.clearCache();
     this._judgeEntityService.clearCache();
 
     this.entity$ = this._pageService
       .entityPageTabInstance<Judge>(
         this._activatedRoute,
         this._judgeEntityService,
-        ['description']
+        ['fullName']
       )
       .pipe(
         tap((entity: Judge) => {
