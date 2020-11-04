@@ -2,9 +2,10 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { MatDialog} from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import MouseWheelZoom from 'ol/interaction/DragZoom';
 import {
   AppState,
   Court, CourtEntityService,
@@ -59,7 +60,7 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
   public _stop$: Subject<void> = new Subject();
 
   public dataGridOptions: DataGridOptions<Decision> = {
-    dataSource: new EntityDataSource(this._messageEntityService),
+    dataSource: new EntityDataSource(this._decisionEntityService),
     columns: [
       {
         label: 'article',
@@ -104,7 +105,7 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
     private _pageService: PageService,
     private _courtEntityService: CourtEntityService,
     private _judgeEntityService: JudgeEntityService,
-    private _messageEntityService: DecisionEntityService,
+    private _decisionEntityService: DecisionEntityService,
     private _translateService: TranslateService,
     private _store$: Store<AppState>,
     private _router: Router,
@@ -115,8 +116,6 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
 
     this._courtEntityService.clearCache();
     this._judgeEntityService.clearCache();
-
-    // Initialize page tab instance base on a single data entity
 
     this.entity$ = this._pageService
       .entityPageTabInstance<Court>(
@@ -177,7 +176,7 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
                 zoom: 15,
                 enableRotation: false,
               }),
-              interactions: [],
+              interactions: [new MouseWheelZoom({duration: 0})],
               controls: [],
 
             });

@@ -29,7 +29,7 @@ export const routes: Routes = [
       {
         path: 'court/:id',
         loadChildren: () => import(
-          './courts-detail-page/court-detail-page.module'
+          './court-detail-page/court-detail-page.module'
           ).then(m => m.CourtDetailPageModule),
         data: {
           title: 'court',

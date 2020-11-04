@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {TranslateService} from '@ngx-translate/core';
 import {
   AppState,
   Judge,
@@ -11,10 +11,9 @@ import {
   PageService,
   selectTotalCountOfDecisions
 } from '@zubr-client/zubr-store';
-import { DataGridOptions, EntityDataSource } from '@zubr-client/zubr-ui-elements';
-import Map from 'ol/Map';
-import { of, Observable, Subject} from 'rxjs';
-import { delay, mergeMap, takeUntil, tap } from 'rxjs/operators';
+import {DataGridOptions, EntityDataSource} from '@zubr-client/zubr-ui-elements';
+import {Observable, Subject} from 'rxjs';
+import {delay, takeUntil, tap} from 'rxjs/operators';
 import {FormControl} from "@angular/forms";
 
 @Component({
@@ -30,14 +29,6 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
   public judges$: Observable<Judge[]>;
 
   public judgeLoading$: Observable<boolean>;
-
-  public judgesLoading$: Observable<boolean>;
-
-  public map: Map;
-
-  public latitude: number = 53.7098;
-
-  public longitude: number = 27.9534;
 
   public _stop$: Subject<void> = new Subject();
 
@@ -77,7 +68,7 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     additionalFilterControl: new FormControl(undefined), // additional filter
     additionalFilterControl2: new FormControl(undefined), // additional filter
     additionalFilterKey: 'judge.id',
-    emptyMessageTitle: 'no_messages_found', // no records found message
+    emptyMessageTitle: 'no_judges_found',
     totalPageCount: this._store$.select<number>(selectTotalCountOfDecisions),
   };
 
@@ -91,7 +82,8 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     private _translateService: TranslateService,
     private _store$: Store<AppState>,
     private _router: Router
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
 
@@ -111,19 +103,6 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
           return entity;
 
         }),
-        mergeMap((entity: Judge, index: number) => {
-          if (entity) {
-            this.dataGridOptions.additionalFilterControl.setValue(entity.id);
-            this.judges$ = this._judgeEntityService.getWithQuery({
-              'comment': entity.id.toString(),
-              'pagination': 'false',
-            }).pipe(
-              takeUntil(this._stop$)
-            );
-          }
-
-          return of(entity);
-        }),
         takeUntil(this._stop$)
       );
 
@@ -132,19 +111,17 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
       tap(
         () => {
           setTimeout(() => {
-            const d: Document = document;
-            const s: any = d.createElement('script');
-            s.src = 'https://zubr-court.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', new Date().toString());
-            (d.head || d.body).appendChild(s);
-            },       500
+              const d: Document = document;
+              const s: any = d.createElement('script');
+              s.src = 'https://zubr-court.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', new Date().toString());
+              (d.head || d.body).appendChild(s);
+            }, 500
           );
         }
       ),
       takeUntil(this._stop$)
     );
-
-    this.judgesLoading$ = this._judgeEntityService.loading$;
 
   }
 

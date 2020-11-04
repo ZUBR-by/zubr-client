@@ -2,11 +2,7 @@ export interface Judge {
 
   id: number;
 
-  firstName: string;
-
-  lastName: string;
-
-  middleName: string;
+  fullName: string;
 
   photoUrl: string;
 

@@ -1,4 +1,3 @@
-import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +13,6 @@ import {
   ZubrComponentsModule
 } from '@zubr-client/zubr-components';
 import { ZubrUiElementsModule } from '@zubr-client/zubr-ui-elements';
-import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { CourtDetailPageComponent } from './court-detail-page.component';
@@ -43,10 +41,8 @@ export const routes: Routes = [
     MatCheckboxModule,
     MatRadioModule,
     MatFormFieldModule,
-    NgxMatDatetimePickerModule,
     MatDatepickerModule,
     MatInputModule,
-    AngularFileUploaderModule,
   ],
 })
 export class CourtDetailPageModule { }
