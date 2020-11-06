@@ -2,9 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { Environment } from '@zubr-client/zubr-interfaces';
-
-import {env} from './env.dist';
+import {Environment} from '@zubr-client/zubr-interfaces';
+import {env} from './env';
 
 export const environment: Environment = {
   production: true,
