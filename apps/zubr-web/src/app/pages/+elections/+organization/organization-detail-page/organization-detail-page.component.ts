@@ -141,13 +141,10 @@ export class OrganizationDetailPageComponent implements OnInit, OnDestroy {
     this._organizationEntityService.clearCache();
     this._memberEntityService.clearCache();
 
-    // Initialize page tab instance base on a single data entity
-
     this.entity$ = this._pageService
-      .entityPageTabInstance<Organization>(
+      .entityPageInstance<Organization>(
         this._activatedRoute,
-        this._organizationEntityService,
-        ['name']
+        this._organizationEntityService
       )
       .pipe(
         tap((entity: Organization) => {

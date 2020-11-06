@@ -118,10 +118,9 @@ export class CourtDetailPageComponent implements OnInit, OnDestroy {
     this._judgeEntityService.clearCache();
 
     this.entity$ = this._pageService
-      .entityPageTabInstance<Court>(
+      .entityPageInstance<Court>(
         this._activatedRoute,
-        this._courtEntityService,
-        ['description']
+        this._courtEntityService
       )
       .pipe(
         tap((entity: Court) => {

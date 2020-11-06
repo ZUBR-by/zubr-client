@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { PageGuardService } from '@zubr-client/zubr-common';
-import { ElectionsComponent } from './elections.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {PageGuardService} from '@zubr-client/zubr-common';
+import {ElectionsComponent} from './elections.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +23,7 @@ export const routes: Routes = [
         data: {
           title: 'map_of_elections',
           favicon: 'map',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -36,7 +36,7 @@ export const routes: Routes = [
         data: {
           title: 'my_subscriptions',
           favicon: 'bookmarks',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -49,7 +49,7 @@ export const routes: Routes = [
         data: {
           title: 'candidates',
           favicon: 'assignment_ind',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -62,7 +62,7 @@ export const routes: Routes = [
         data: {
           title: 'campaigns',
           favicon: 'settings_input_antenna',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -75,7 +75,7 @@ export const routes: Routes = [
         data: {
           title: 'about',
           favicon: 'favorite',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -87,7 +87,7 @@ export const routes: Routes = [
         data: {
           title: 'verify',
           favicon: 'verified_user',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -99,7 +99,7 @@ export const routes: Routes = [
         data: {
           title: 'privacy_policy',
           favicon: 'description',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -112,7 +112,7 @@ export const routes: Routes = [
         data: {
           title: 'rules_of_forums',
           favicon: 'description',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -125,7 +125,7 @@ export const routes: Routes = [
         data: {
           title: 'commissions',
           favicon: 'account_balance',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -138,8 +138,8 @@ export const routes: Routes = [
         data: {
           title: 'commission',
           favicon: 'account_balance',
-          navigateToPageTab: true,
-          dynamicPageTabView: true,
+
+
         },
         canActivate: [PageGuardService],
       },
@@ -152,7 +152,7 @@ export const routes: Routes = [
         data: {
           title: 'incidents',
           favicon: 'add_alert',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -165,8 +165,8 @@ export const routes: Routes = [
         data: {
           title: 'incident',
           favicon: 'add_alert',
-          navigateToPageTab: true,
-          dynamicPageTabView: true,
+
+
         },
         canActivate: [PageGuardService],
       },
@@ -179,7 +179,7 @@ export const routes: Routes = [
         data: {
           title: 'organizations',
           favicon: 'flag',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -192,8 +192,8 @@ export const routes: Routes = [
         data: {
           title: 'organization',
           favicon: 'account_box',
-          navigateToPageTab: true,
-          dynamicPageTabView: true,
+
+
         },
         canActivate: [PageGuardService],
       },
@@ -206,7 +206,7 @@ export const routes: Routes = [
         data: {
           title: 'members',
           favicon: ' assignment_ind ',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -219,8 +219,8 @@ export const routes: Routes = [
         data: {
           title: 'member',
           favicon: 'account_box',
-          navigateToPageTab: true,
-          dynamicPageTabView: true,
+
+
         },
         canActivate: [PageGuardService],
       },
@@ -231,7 +231,7 @@ export const routes: Routes = [
           ).then(m => m.TestPageModule),
         data: {
           title: 'test',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -241,7 +241,7 @@ export const routes: Routes = [
           ).then(m => m.ResultsPageModule),
         data: {
           title: 'results',
-          navigateToPageTab: true,
+
         },
         canActivate: [PageGuardService],
       },
@@ -270,4 +270,5 @@ export const routes: Routes = [
   ],
 })
 
-export class ElectionsRoutingModule {}
+export class ElectionsRoutingModule {
+}

@@ -110,13 +110,10 @@ export class MemberDetailPageComponent implements OnInit, OnDestroy {
    */
   public ngOnInit(): void {
 
-    // Initialize page tab instance base on a single data entity
-
     this.entity$ = this._pageService
-      .entityPageTabInstance<Member>(
+      .entityPageInstance<Member>(
         this._activatedRoute,
-        this._memberEntityService,
-        ['fullName']
+        this._memberEntityService
       )
       .pipe(
         tap((entity: Member) => {

@@ -213,13 +213,10 @@ export class CommissionDetailPageComponent implements OnInit, OnDestroy {
     this._commissionEntityService.clearCache();
     this._memberEntityService.clearCache();
 
-    // Initialize page tab instance base on a single data entity
-
     this.entity$ = this._pageService
-      .entityPageTabInstance<Commission>(
+      .entityPageInstance<Commission>(
         this._activatedRoute,
-        this._commissionEntityService,
-        ['description']
+        this._commissionEntityService
       )
       .pipe(
         tap((entity: Commission) => {

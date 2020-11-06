@@ -22,7 +22,6 @@ export const routes: Routes = [
         data: {
           title: 'courts',
           favicon: 'account_balance',
-          navigateToPageTab: true,
         },
         canActivate: [PageGuardService],
       },
@@ -34,8 +33,6 @@ export const routes: Routes = [
         data: {
           title: 'court',
           favicon: 'account_balance',
-          navigateToPageTab: true,
-          dynamicPageTabView: true,
         },
         canActivate: [PageGuardService],
       },
@@ -47,7 +44,6 @@ export const routes: Routes = [
         data: {
           title: 'judges',
           favicon: 'account_balance',
-          navigateToPageTab: true,
         },
         canActivate: [PageGuardService],
       },
@@ -59,7 +55,6 @@ export const routes: Routes = [
         data: {
           title: 'judges',
           favicon: 'account_balance',
-          navigateToPageTab: true,
         },
         canActivate: [PageGuardService],
       },
@@ -71,7 +66,6 @@ export const routes: Routes = [
         data: {
           title: 'map_of_elections',
           favicon: 'map',
-          navigateToPageTab: true,
         },
         canActivate: [PageGuardService],
       },

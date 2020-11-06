@@ -72,8 +72,6 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     totalPageCount: this._store$.select<number>(selectTotalCountOfDecisions),
   };
 
-  private mapElementRef: ElementRef;
-
   public constructor(
     private _activatedRoute: ActivatedRoute,
     private _pageService: PageService,
@@ -90,10 +88,9 @@ export class JudgeDetailPageComponent implements OnInit, OnDestroy {
     this._judgeEntityService.clearCache();
 
     this.entity$ = this._pageService
-      .entityPageTabInstance<Judge>(
+      .entityPageInstance<Judge>(
         this._activatedRoute,
-        this._judgeEntityService,
-        ['fullName']
+        this._judgeEntityService
       )
       .pipe(
         tap((entity: Judge) => {

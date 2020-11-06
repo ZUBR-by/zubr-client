@@ -6,10 +6,6 @@ export abstract class ZubrStore {
 
   public altDataServiceConfig?: DefaultDataServiceConfig;
 
-  public maxPageTabsVisible: number;
-
-  public maxPageTabsOpened: number;
-
   public maxBookmarks: number;
 
   public snackBarDuration: number;

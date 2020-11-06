@@ -15,8 +15,6 @@ export const environment: Environment = {
     altDataServiceConfig: {
       root: '', // Alternative API gateway URL
     },
-    maxPageTabsVisible: 5,
-    maxPageTabsOpened: 20,
     maxBookmarks: 50,
     snackBarDuration: 3000,
   },

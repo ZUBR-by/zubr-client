@@ -108,11 +108,7 @@ import {
   bookmarkReducer,
   BookmarkEffects,
 } from './features/bookmark';
-import {
-  pageReducer,
-  PageEffects,
-  PageService
-} from './features/page';
+import {PageService} from './features/page';
 import {
   campaignFeatureKey,
   candidateFeatureKey,
@@ -147,7 +143,6 @@ export const reducers: ActionReducerMap<AppState> = {
   observer: observerReducer,
   observerRequest: observerRequestReducer,
   organization: organizationReducer,
-  page: pageReducer,
   member: memberReducer,
   place: placeReducer,
   report: reportReducer,
@@ -173,7 +168,6 @@ export const reducers: ActionReducerMap<AppState> = {
       ObserverEffects,
       ObserverRequestEffects,
       OrganizationEffects,
-      PageEffects,
       PlaceEffects,
       MessageEffects,
       ReportEffects,
@@ -214,7 +208,6 @@ export class ZubrStoreModule {
         OrganizationService,
         OrganizationDataService,
         PageService,
-        PageEffects,
         MemberDataService,
         MemberService,
         JudgeService,

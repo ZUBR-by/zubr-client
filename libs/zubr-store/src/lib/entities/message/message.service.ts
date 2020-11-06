@@ -4,10 +4,6 @@ import { DataServiceError, EntityAction, EntityActionDataServiceError } from '@n
 import { Action, Store } from '@ngrx/store';
 import { BadRequest } from '@zubr-client/zubr-interfaces';
 import { of, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { PageTab } from '../../features/page/page-tab.interface';
-import { pageActions } from '../../features/page/page.actions';
-import { selectActivePageTab } from '../../features/page/page.reducer';
 import { AppState } from '../../zubr-store.constants';
 import { MessageActions } from './message.actions';
 import { Message } from './message.interface';
@@ -61,26 +57,5 @@ export class MessageService {
 
   }
 
-  /**
-   * Handles successful deletion action
-   * @description
-   * @returns {Observable<Action>}
-   * @memberof MessageService
-   */
-  public handleSuccessOnDelete(): Observable<Action> {
-
-    return this._store$.select(selectActivePageTab).pipe(
-      switchMap(
-        (activeTab: PageTab) => {
-          if (activeTab) {
-            return of(pageActions.ClosePageTabAction({
-              payload: activeTab,
-            }));
-          }
-        }
-      )
-    );
-
-  }
 
 }

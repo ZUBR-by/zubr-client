@@ -6,7 +6,6 @@ import { LanguageSwitcherModule } from './general/language-switcher';
 import { ListOperationsPanelModule } from './general/list-operations-panel';
 import { NotificationBarModule } from './general/notification-bar';
 import { PageNotFoundModule } from './general/page-not-found';
-import { PageTabsModule } from './general/page-tabs';
 import { SidebarModule } from './general/sidebar';
 import { SidebarAdminModule } from './general/sidebar-admin';
 import { SidebarCourtsModule } from './general/sidebar-courts';
@@ -31,7 +30,6 @@ import { OrganizationListModule } from './lists/organization-list/organization-l
   exports: [
     LanguageSwitcherModule,
     ListOperationsPanelModule,
-    PageTabsModule,
     SidebarModule,
     SidebarCourtsModule,
     ToolbarMobileModule,

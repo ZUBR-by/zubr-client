@@ -5,8 +5,8 @@ import {
   AuthState,
   MessageState,
   ObserverState,
-  PageState,
-  Place, ReportState,
+  Place,
+  ReportState,
   VerifyState
 } from '.';
 import { CampaignState } from './entities/campaign';
@@ -63,8 +63,6 @@ export interface AppState {
   member: MemberState;
 
   organization: OrganizationState;
-
-  page: PageState;
 
   observer: ObserverState;
 

@@ -70,13 +70,10 @@ export class MessageDetailPageComponent implements OnInit, OnDestroy {
     this._messageEntityService.clearCache();
     this._memberEntityService.clearCache();
 
-    // Initialize page tab instance base on a single data entity
-
     this.entity$ = this._pageService
-      .entityPageTabInstance<Message>(
+      .entityPageInstance<Message>(
         this._activatedRoute,
-        this._messageEntityService,
-        ['#', 'id']
+        this._messageEntityService
       )
       .pipe(
         tap(entity => {

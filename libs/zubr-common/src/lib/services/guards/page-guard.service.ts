@@ -7,12 +7,8 @@ import {
   UrlTree
 } from '@angular/router';
 import {ReducerManagerDispatcher, Store} from '@ngrx/store';
-import {
-  pageActions, AppState,
-  PageTab
-} from '@zubr-client/zubr-store';
+import {AppState} from '@zubr-client/zubr-store';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {Meta, Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -38,10 +34,6 @@ export class PageGuardService implements CanActivate {
     | boolean
     | UrlTree {
     const routeMetadata: Data = route.data;
-    const pageTab: PageTab = {
-      url: state.url,
-      metadata: routeMetadata,
-    };
 
     this.translate.get(routeMetadata.title).subscribe(translation => {
       this.title.setTitle(`${translation} | ZUBR`);
@@ -52,16 +44,6 @@ export class PageGuardService implements CanActivate {
 
     this.meta.updateTag({content: window.location.origin + state.url}, "property='og:url'")
 
-    if (routeMetadata.navigateToPageTab) {
-      this._store$.dispatch(pageActions.ChangePageTabAction({payload: pageTab,}));
-
-      return this._dispatcher.pipe(
-        map(action => {
-          return !(action.type === pageActions.PageTabsLimitExceededAction.type);
-        })
-      );
-    }
-
-    return false;
+    return true;
   }
 }
