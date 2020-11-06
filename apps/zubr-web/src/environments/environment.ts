@@ -3,12 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 import { Environment } from '@zubr-client/zubr-interfaces';
+import {env} from './env';
 
 export const environment: Environment = {
   production: true,
   zubrStoreConfig: {
     dataServiceConfig: {
-      root: window['env']['apiUrl'],
+      root: env.apiURL,
     },
     // We be used only until API backed gateway is not ready
     altDataServiceConfig: {

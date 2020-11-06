@@ -4,6 +4,14 @@ pipeline {
     disableConcurrentBuilds()
   }
   stages {
+    stage('Pre-Build') {
+        environment {
+            API_URL = 'https://zubr.club'
+        }
+        steps {
+            sh 'envsubst < apps/zubr-web/src/environments/env.dist.ts > apps/zubr-web/src/environments/env.ts'
+        }
+    }
     stage('Build') {
         agent {
             docker {
@@ -37,14 +45,6 @@ pipeline {
         steps {
             unstash 'infra'
             unstash 'output'
-            writeFile file: 'dist/apps/zubr-web/assets/env/env.js', text: """
-(function(window) {
-    window['env'] = window['env'] || {};
-
-    // default Environment variables
-    window['env']['apiUrl'] = '$API_URL';
-})(this);
-"""
             ansiblePlaybook(
                playbook: "infrastructure/ansistrano_${env.BRANCH}_deploy.yml",
                inventory: "$FRONTEND_HOST,",
