@@ -5,8 +5,11 @@ pipeline {
   }
   stages {
     stage('Pre-Build') {
+        environment {
+            API_URL = 'https://zubr.club'
+        }
         steps {
-            sh 'envsubst < apps/zubr-web/src/assets/env/env.template.js > apps/zubr-web/src/assets/env/env.js'
+            sh 'envsubst < apps/zubr-web/src/environments/env.dist.ts > apps/zubr-web/src/environments/env.ts'
         }
     }
     stage('Build') {
