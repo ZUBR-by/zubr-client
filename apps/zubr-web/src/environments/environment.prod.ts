@@ -4,7 +4,7 @@
 
 import { Environment } from '@zubr-client/zubr-interfaces';
 
-import {env} from './env.dist';
+import {env} from './env';
 
 export const environment: Environment = {
   production: true,
