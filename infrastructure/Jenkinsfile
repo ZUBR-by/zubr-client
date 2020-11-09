@@ -26,7 +26,7 @@ pipeline {
         steps {
             sh 'npm ci'
             sh 'npm run test'
-            sh 'npm run lint'
+//             sh 'npm run lint'
             sh 'npm run web:prod'
 
             stash includes: 'dist/apps/zubr-web/**', name: 'output'
