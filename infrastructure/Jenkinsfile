@@ -4,6 +4,14 @@ pipeline {
     disableConcurrentBuilds()
   }
   stages {
+    stage('Pre-Build') {
+        environment {
+            API_URL = 'https://zubr.club'
+        }
+        steps {
+            sh 'envsubst < apps/zubr-web/src/environments/env.dist.ts > apps/zubr-web/src/environments/env.ts'
+        }
+    }
     stage('Build') {
         agent {
             docker {
@@ -16,9 +24,9 @@ pipeline {
             npm_config_cache = 'npm-cache'
         }
         steps {
-            sh 'envsubst < apps/zubr-web/src/environments/env.dist.ts > apps/zubr-web/src/environments/env.ts'
             sh 'npm ci'
             sh 'npm run test'
+            sh 'ls apps/zubr-web/src/environments/env.ts'
 //             sh 'npm run lint'
             sh 'npm run web:prod'
 
