@@ -9,7 +9,9 @@ pipeline {
             API_URL = 'https://zubr.club'
         }
         steps {
+            sh 'dir'
             sh 'envsubst < apps/zubr-web/src/environments/env.dist.ts > apps/zubr-web/src/environments/env.ts'
+            sh 'cat apps/zubr-web/src/environments/env.ts'
         }
     }
     stage('Build') {
