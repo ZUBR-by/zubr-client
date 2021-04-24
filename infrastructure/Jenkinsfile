@@ -26,7 +26,7 @@ pipeline {
         steps {
             sh 'npm ci'
             sh 'npm run test'
-            sh 'ls apps/zubr-web/src/environments/env.ts'
+            sh 'cat apps/zubr-web/src/environments/env.ts'
 //             sh 'npm run lint'
             sh 'npm run web:prod'
 
