@@ -1,6 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SwUpdate, UpdateAvailableEvent } from '@angular/service-worker';
 import { ReducerManagerDispatcher } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '@zubr-client/zubr-common';
@@ -34,7 +33,6 @@ export class AppComponent implements AfterViewInit {
     private _dispatcher: ReducerManagerDispatcher,
     private _languageService: LanguageService,
     private _translateService: TranslateService,
-    private _swUpdate: SwUpdate,
     private _dialog: MatDialog
   ) {
     this._languageService.init();
@@ -44,12 +42,6 @@ export class AppComponent implements AfterViewInit {
    * After view init
    */
   public ngAfterViewInit(): void {
-
-    // In case of new updates available
-    this._swUpdate.available.subscribe((event: UpdateAvailableEvent) => {
-      // localStorage.setItem('update', JSON.stringify(event));
-      this.onUpdateAvailableModal();
-    });
 
     // show disclaimer
 

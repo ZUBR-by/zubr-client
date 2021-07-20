@@ -61,9 +61,7 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "apps/zubr-web/ngsw-config.json"
+              ]
             }
           }
         },
