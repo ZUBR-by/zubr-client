@@ -40,7 +40,8 @@ pipeline {
     }
     stage('Deploy') {
         environment {
-            FRONTEND_HOST   = credentials('FRONTEND_HOST')
+            CONSUL_HTTP_TOKEN    = credentials('CONSUL_HTTP_TOKEN')
+            def FRONTEND_HOST = sh(script: "consul kv get ci/api-ip", returnStdout: true).trim()
         }
         steps {
             unstash 'infra'
