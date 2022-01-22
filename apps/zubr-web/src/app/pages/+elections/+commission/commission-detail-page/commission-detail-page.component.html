@@ -54,26 +54,26 @@
         <div class="col-md-12 px-3">
           <strong>Прием сообщений и фотографий протоколов остановлен. Спасибо, что предоставляли нам информацию. </strong>
           <br>
-<!--          <zubr-client-button-->
-<!--            *ngIf="commission.type === 1 || commission.type === 2"-->
-<!--            class="register-incident-button mr-2 mb-2"-->
-<!--            (click)="onRegisterViolationModal()"-->
-<!--            [options]="{-->
-<!--                        icon: 'add_alert',-->
-<!--                        label: 'registration_of_incident',-->
-<!--                        appearance: 'flat'-->
-<!--                      }">-->
-<!--          </zubr-client-button>-->
-<!--          <zubr-client-button-->
-<!--            *ngIf="commission.type === 2"-->
-<!--            class="mr-2 mb-2"-->
-<!--            (click)="onReportModal()"-->
-<!--            [options]="{-->
-<!--                      icon: 'record_voice_over',-->
-<!--                      label: 'report_turnout',-->
-<!--                      appearance: 'primary'-->
-<!--                    }"-->
-<!--          ></zubr-client-button>-->
+          <zubr-client-button
+            *ngIf="commission.type === 1 || commission.type === 2"
+            class="register-incident-button mr-2 mb-2"
+            (click)="onRegisterViolationModal()"
+            [options]="{
+                        icon: 'add_alert',
+                        label: 'registration_of_incident',
+                        appearance: 'flat'
+                      }">
+          </zubr-client-button>
+          <zubr-client-button
+            *ngIf="commission.type === 2"
+            class="mr-2 mb-2"
+            (click)="onReportModal()"
+            [options]="{
+                      icon: 'record_voice_over',
+                      label: 'report_turnout',
+                      appearance: 'primary'
+                    }"
+          ></zubr-client-button>
           <zubr-client-button
             class="mr-2 mb-2"
             [routerLink]="['/elections/commission/' + commission.id]"
