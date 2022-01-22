@@ -40,15 +40,18 @@ pipeline {
     }
     stage('Deploy') {
         environment {
-            CONSUL_HTTP_TOKEN    = credentials('CONSUL_HTTP_TOKEN')
-            def FRONTEND_HOST = sh(script: "consul kv get ci/api-ip", returnStdout: true).trim()
+                DIGITALOCEAN_ACCESS_TOKEN = credentials('DIGITALOCEAN_ACCESS_TOKEN')
+                def HOSTS = sh(
+                    script: "doctl compute droplet list --format PublicIPv4 --no-header --tag-name zubr_in| tr '\n' ','",
+                    returnStdout: true
+                ).trim()
         }
         steps {
             unstash 'infra'
             unstash 'output'
             ansiblePlaybook(
                playbook: 'infrastructure/ansistrano_master_deploy.yml',
-               inventory: "$FRONTEND_HOST,",
+               inventory: "$HOSTS",
                credentialsId: "SSH_PRIVATE_KEY",
                hostKeyChecking: false
            )
