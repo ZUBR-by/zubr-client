@@ -42,7 +42,7 @@ pipeline {
         environment {
                 DIGITALOCEAN_ACCESS_TOKEN = credentials('DIGITALOCEAN_ACCESS_TOKEN')
                 def HOSTS = sh(
-                    script: "doctl compute droplet list --format PublicIPv4 --no-header --tag-name zubr_in| tr '\n' ','",
+                    script: "doctl compute droplet list --format PublicIPv4 --no-header --tag-name zubr_app| tr '\n' ','",
                     returnStdout: true
                 ).trim()
         }
@@ -52,7 +52,7 @@ pipeline {
             ansiblePlaybook(
                playbook: 'infrastructure/ansistrano_master_deploy.yml',
                inventory: "$HOSTS",
-               credentialsId: "SSH_PRIVATE_KEY",
+               credentialsId: "CURRENT_DEPLOY_KEY",
                hostKeyChecking: false
            )
         }
